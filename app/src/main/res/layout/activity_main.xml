@@ -1,85 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/wooden_table">
 
-    <ImageView
-        android:id="@+id/diceView2"
-        android:layout_width="133dp"
-        android:layout_height="117dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="218dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="420dp"
+        android:text="Score: 0"
+        android:textColor="#8BC34A"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dices_icon" />
-
-    <ImageView
-        android:id="@+id/diceView3"
-        android:layout_width="133dp"
-        android:layout_height="117dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/diceView4"
-        app:layout_constraintHorizontal_bias="0.307"
+        app:layout_constraintHorizontal_bias="0.243"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/diceView1"
-        app:srcCompat="@drawable/dices_icon" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/diceView4"
-        android:layout_width="133dp"
-        android:layout_height="117dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+    <TextView
+        android:id="@+id/total_score"
+        android:layout_width="315dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="8dp"
+        android:text="TOTAL Score: 0"
+        android:textColor="#8BC34A"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/diceView2"
-        app:srcCompat="@drawable/dices_icon" />
-
-    <ImageView
-        android:id="@+id/diceView5"
-        android:layout_width="133dp"
-        android:layout_height="117dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/diceView6"
-        app:layout_constraintHorizontal_bias="0.307"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/diceView3"
-        app:srcCompat="@drawable/dices_icon" />
-
-    <ImageView
-        android:id="@+id/diceView6"
-        android:layout_width="133dp"
-        android:layout_height="117dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/diceView4"
-        app:srcCompat="@drawable/dices_icon" />
+        app:layout_constraintTop_toBottomOf="@+id/score" />
 
     <ImageView
         android:id="@+id/diceView1"
-        android:layout_width="133dp"
-        android:layout_height="117dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@+id/diceView2"
-        app:layout_constraintHorizontal_bias="0.304"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dices_icon" />
+        app:srcCompat="@drawable/white_1" />
+
+    <ImageView
+        android:id="@+id/diceView2"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginRight="84dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/white_2" />
+
+    <ImageView
+        android:id="@+id/diceView3"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/diceView4"
+        app:layout_constraintHorizontal_bias="0.167"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diceView1"
+        app:srcCompat="@drawable/white_3" />
+
+    <ImageView
+        android:id="@+id/diceView4"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diceView2"
+        app:srcCompat="@drawable/white_4" />
+
+    <ImageView
+        android:id="@+id/diceView5"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/diceView6"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diceView3"
+        app:srcCompat="@drawable/white_5" />
+
+    <ImageView
+        android:id="@+id/diceView6"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginRight="88dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diceView4"
+        app:srcCompat="@drawable/white_6" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Roll"
+        android:layout_width="81dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="144dp"
+        android:text="Hodiť"
+        app:layout_constraintEnd_toStartOf="@+id/diceView4"
+        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintStart_toEndOf="@+id/diceView3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/end_turn_button"
+        android:layout_width="142dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="344dp"
+        android:text="KONIEC ŤAHU"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/diceView6" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
