@@ -2,6 +2,7 @@ package com.example.projekt_kocky;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -26,8 +27,8 @@ public class MainActivity<flag1> extends AppCompatActivity {
     boolean flag1, flag2, flag3, flag4, flag5, flag6;
     boolean flag1_visibility, flag2_visibility, flag3_visibility, flag4_visibility, flag5_visibility, flag6_visibility;
 
-    int count = 0;
     int score = 0;
+    int last_roll_score = 0;
     int total_score = 0;
 
     int[] round_values = {0,0,0,0,0,0};
@@ -36,6 +37,8 @@ public class MainActivity<flag1> extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final MediaPlayer roll = MediaPlayer.create(this, R.raw.dice_roll);
 
         endTurn = (Button) findViewById(R.id.end_turn_button);
         rollDices = (Button) findViewById(R.id.button);
@@ -56,13 +59,28 @@ public class MainActivity<flag1> extends AppCompatActivity {
         imageView5.setVisibility(View.INVISIBLE);
         imageView6.setVisibility(View.INVISIBLE);
 
+        flag1_visibility = true;
+        flag2_visibility = true;
+        flag3_visibility = true;
+        flag4_visibility = true;
+        flag5_visibility = true;
+        flag6_visibility = true;
+
         endTurn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
 
                 total_score = total_score + score;
-                score_counter.setText("Score: 0");
+                score = 0;
+                last_roll_score = 0;
+                score_counter.setText("Score: " + score);
                 total_score_counter.setText("TOTAL Score: " + total_score);
-                rollDices.setVisibility(View.VISIBLE);
+
+                flag1_visibility = true;
+                flag2_visibility = true;
+                flag3_visibility = true;
+                flag4_visibility = true;
+                flag5_visibility = true;
+                flag6_visibility = true;
 
                 imageView1.setVisibility(View.INVISIBLE);
                 imageView2.setVisibility(View.INVISIBLE);
@@ -77,6 +95,8 @@ public class MainActivity<flag1> extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                roll.start();
+
                 flag1 = false;
                 flag2 = false;
                 flag3 = false;
@@ -87,28 +107,27 @@ public class MainActivity<flag1> extends AppCompatActivity {
                 if(flag1_visibility==false){
                     imageView1.setVisibility(View.INVISIBLE);
                 }
+                else imageView1.setVisibility(View.VISIBLE);
                 if(flag2_visibility==false){
                     imageView2.setVisibility(View.INVISIBLE);
                 }
+                else imageView2.setVisibility(View.VISIBLE);
                 if(flag3_visibility==false){
                     imageView3.setVisibility(View.INVISIBLE);
                 }
+                else imageView3.setVisibility(View.VISIBLE);
                 if(flag4_visibility==false){
                     imageView4.setVisibility(View.INVISIBLE);
                 }
+                else imageView4.setVisibility(View.VISIBLE);
                 if(flag5_visibility==false){
                     imageView5.setVisibility(View.INVISIBLE);
                 }
+                else imageView5.setVisibility(View.VISIBLE);
                 if(flag6_visibility==false){
                     imageView6.setVisibility(View.INVISIBLE);
                 }
-
-                flag1_visibility = true;
-                flag2_visibility = true;
-                flag3_visibility = true;
-                flag4_visibility = true;
-                flag5_visibility = true;
-                flag6_visibility = true;
+                else imageView6.setVisibility(View.VISIBLE);
 
                 round_values[0] = 0;
                 round_values[1] = 0;
@@ -116,14 +135,7 @@ public class MainActivity<flag1> extends AppCompatActivity {
                 round_values[3] = 0;
                 round_values[4] = 0;
                 round_values[5] = 0;
-/*
-                imageView1.setVisibility(View.VISIBLE);
-                imageView2.setVisibility(View.VISIBLE);
-                imageView3.setVisibility(View.VISIBLE);
-                imageView4.setVisibility(View.VISIBLE);
-                imageView5.setVisibility(View.VISIBLE);
-                imageView6.setVisibility(View.VISIBLE);
-*/
+
                 imageView1.setClickable(true);
                 imageView2.setClickable(true);
                 imageView3.setClickable(true);
@@ -160,79 +172,16 @@ public class MainActivity<flag1> extends AppCompatActivity {
                 imageView5.setImageResource(res5);
                 imageView6.setImageResource(res6);
 
+                System.out.println("\nSCORE: " + score);
+                System.out.println("LAST_ROLL_SCORE: " + last_roll_score);
+                System.out.println("TOALA_SCORE: " + total_score);
+
+                last_roll_score = score;
                 score = 0;
-                score_counter.setText("Score: " + score);
+                score_counter.setText("Score: " + last_roll_score);
                 System.out.println("[ " + round_values[0] + " " + round_values[1] + " " + round_values[2] + " " + round_values[3] + " " + round_values[4] + " " + round_values[5] + " ]");
             }
         });
-
-/**
-        nextRoll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                round_values[0] = 0;
-                round_values[1] = 0;
-                round_values[2] = 0;
-                round_values[3] = 0;
-                round_values[4] = 0;
-                round_values[5] = 0;
-
-                if(flag1_visibility==false){
-                    imageView1.setVisibility(View.INVISIBLE);
-                }
-                if(flag2_visibility==false){
-                    imageView2.setVisibility(View.INVISIBLE);
-                }
-                if(flag3_visibility==false){
-                    imageView3.setVisibility(View.INVISIBLE);
-                }
-                if(flag4_visibility==false){
-                    imageView4.setVisibility(View.INVISIBLE);
-                }
-                if(flag5_visibility==false){
-                    imageView5
-                            .setVisibility(View.INVISIBLE);
-                }
-                if(flag6_visibility==false){
-                    imageView6.setVisibility(View.INVISIBLE);
-                }
-
-                value1 = randomDiceValue();
-                value2 = randomDiceValue();
-                value3 = randomDiceValue();
-                value4 = randomDiceValue();
-                value5 = randomDiceValue();
-                value6 = randomDiceValue();
-
-                rotateDice();
-
-                res1 = getResources().getIdentifier("white_" + value1, "drawable", "com.example.projekt_kocky");
-                res1_red = getResources().getIdentifier("red_" + value1, "drawable", "com.example.projekt_kocky");
-                res2 = getResources().getIdentifier("white_" + value2, "drawable", "com.example.projekt_kocky");
-                res2_red = getResources().getIdentifier("red_" + value2, "drawable", "com.example.projekt_kocky");
-                res3 = getResources().getIdentifier("white_" + value3, "drawable", "com.example.projekt_kocky");
-                res3_red = getResources().getIdentifier("red_" + value3, "drawable", "com.example.projekt_kocky");
-                res4 = getResources().getIdentifier("white_" + value4, "drawable", "com.example.projekt_kocky");
-                res4_red = getResources().getIdentifier("red_" + value4, "drawable", "com.example.projekt_kocky");
-                res5 = getResources().getIdentifier("white_" + value5, "drawable", "com.example.projekt_kocky");
-                res5_red = getResources().getIdentifier("red_" + value5, "drawable", "com.example.projekt_kocky");
-                res6 = getResources().getIdentifier("white_" + value6, "drawable", "com.example.projekt_kocky");
-                res6_red = getResources().getIdentifier("red_" + value6, "drawable", "com.example.projekt_kocky");
-
-                imageView1.setImageResource(res1);
-                imageView2.setImageResource(res2);
-                imageView3.setImageResource(res3);
-                imageView4.setImageResource(res4);
-                imageView5.setImageResource(res5);
-                imageView6.setImageResource(res6);
-
-
-                score_counter.setText("Score: " + score);
-                total_score_counter.setText("TOTAL Score: " + (total_score+score));
-            }
-        });
-**/
 
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,7 +191,6 @@ public class MainActivity<flag1> extends AppCompatActivity {
                     imageView1.setImageResource(res1_red);
                     flag1 = true;
                     flag1_visibility = false;
-                    count = count + value1;
                     round_values[0] = value1;
                     mathematics(round_values);
                 }
@@ -250,7 +198,6 @@ public class MainActivity<flag1> extends AppCompatActivity {
                     imageView1.setImageResource(res1);
                     flag1 = false;
                     flag1_visibility = true;
-                    count = count - value1;
                     round_values[0] = 0;
                     mathematics(round_values);
                     }
@@ -265,7 +212,6 @@ public class MainActivity<flag1> extends AppCompatActivity {
                     imageView2.setImageResource(res2_red);
                     flag2 = true;
                     flag2_visibility = false;
-                    count = count + value2;
                     round_values[1] = value2;
                     mathematics(round_values);
                 }
@@ -273,7 +219,6 @@ public class MainActivity<flag1> extends AppCompatActivity {
                     imageView2.setImageResource(res2);
                     flag2 = false;
                     flag2_visibility = true;
-                    count = count - value2;
                     round_values[1] = 0;
                     mathematics(round_values);
                 }
@@ -288,7 +233,6 @@ public class MainActivity<flag1> extends AppCompatActivity {
                     imageView3.setImageResource(res3_red);
                     flag3 = true;
                     flag3_visibility = false;
-                    count = count + value3;
                     round_values[2] = value3;
                     mathematics(round_values);
                 }
@@ -296,7 +240,6 @@ public class MainActivity<flag1> extends AppCompatActivity {
                     imageView3.setImageResource(res3);
                     flag3 = false;
                     flag3_visibility = true;
-                    count = count - value3;
                     round_values[2] = 0;
                     mathematics(round_values);
                 }
@@ -311,7 +254,6 @@ public class MainActivity<flag1> extends AppCompatActivity {
                     imageView4.setImageResource(res4_red);
                     flag4 = true;
                     flag4_visibility = false;
-                    count = count + value4;
                     round_values[3] = value4;
                     mathematics(round_values);
                 }
@@ -319,7 +261,6 @@ public class MainActivity<flag1> extends AppCompatActivity {
                     imageView4.setImageResource(res4);
                     flag4 = false;
                     flag4_visibility = true;
-                    count = count - value4;
                     round_values[3] = 0;
                     mathematics(round_values);
                 }
@@ -334,15 +275,13 @@ public class MainActivity<flag1> extends AppCompatActivity {
                     imageView5.setImageResource(res5_red);
                     flag5 = true;
                     flag5_visibility = false;
-                    count = count + value5;
                     round_values[4] = value5;
                     mathematics(round_values);
                 }
                 else{
                     imageView5.setImageResource(res5);
                     flag5 = false;
-                    flag2_visibility = true;
-                    count = count - value5;
+                    flag5_visibility = true;
                     round_values[4] = 0;
                     mathematics(round_values);
                 }
@@ -357,7 +296,6 @@ public class MainActivity<flag1> extends AppCompatActivity {
                     imageView6.setImageResource(res6_red);
                     flag6 = true;
                     flag6_visibility = false;
-                    count = count + value6;
                     round_values[5] = value6;
                     mathematics(round_values);
                 }
@@ -365,14 +303,13 @@ public class MainActivity<flag1> extends AppCompatActivity {
                     imageView6.setImageResource(res6);
                     flag6 = false;
                     flag6_visibility = true;
-                    count = count - value6;
                     round_values[5] = 0;
                     mathematics(round_values);
                 }
             }
         });
 
-        total_score = mathematics(round_values);
+        last_roll_score = mathematics(round_values);;
     }
 
     public static int randomDiceValue() {
@@ -385,6 +322,7 @@ public class MainActivity<flag1> extends AppCompatActivity {
         if(flag1_visibility==true){
             imageView1.setVisibility(View.VISIBLE);
             imageView1.startAnimation(anim);
+
         }
         if(flag2_visibility==true){
             imageView2.setVisibility(View.VISIBLE);
@@ -393,6 +331,7 @@ public class MainActivity<flag1> extends AppCompatActivity {
         if(flag3_visibility==true){
             imageView3.setVisibility(View.VISIBLE);
             imageView3.startAnimation(anim);
+
         }
         if(flag4_visibility==true){
             imageView4.setVisibility(View.VISIBLE);
@@ -406,6 +345,15 @@ public class MainActivity<flag1> extends AppCompatActivity {
             imageView6.setVisibility(View.VISIBLE);
             imageView6.startAnimation(anim);
         }
+/*
+        imageView1.startAnimation(anim);
+        imageView2.startAnimation(anim);
+        imageView3.startAnimation(anim);
+        imageView4.startAnimation(anim);
+        imageView5.startAnimation(anim);
+        imageView6.startAnimation(anim);
+
+ */
     }
 
     private int mathematics(int[] pole){
@@ -417,10 +365,11 @@ public class MainActivity<flag1> extends AppCompatActivity {
         int count_of_5 = 0;
         int count_of_6 = 0;
 
-        score = 0;
+        score = last_roll_score;
 
         for(int i = 0; i < pole.length; i++){
-            System.out.println("kocka " + (i+1) + " = " + pole[i]);
+
+            ///System.out.println("kocka " + (i+1) + " = " + pole[i]);
 
             switch (pole[i]){
                 case 1:
@@ -478,6 +427,7 @@ public class MainActivity<flag1> extends AppCompatActivity {
         else if(count_of_6 == 5){score = score + 2400;}
         else if(count_of_6 == 6){score = score + 4800;}
 
+        //last_roll_score = score;
         score_counter.setText("Score: " + score);
         return score;
     }
