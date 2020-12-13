@@ -6,9 +6,9 @@ Pravidlá su napísané v sekcií pravidlá, každý hráč by si ich mal pred h
 Cieľom hry pre dvoch hráčov je aby jeden z hráčov prekročil hranicu bodov ktorá bola na začiatku hry zvolená,
 týmto sa hráč stane víťazom.
 
-Projekt obsahuje: pestré uživatelské rozhranie s jednoduchým ovládaním hry,
-                  menu, ktoré dostane hráča do každej aktivity,
-                  zvuky (hodenie kockami),
-                  vibrácia pri hodení kockami,
+Projekt obsahuje: pestré uživatelské rozhranie s jednoduchým ovládaním hry/
+                  menu, ktoré dostane hráča do každej aktivity/
+                  zvuky (hodenie kockami)/
+                  vibrácia pri hodení kockami/
                   ovládanie kocky potrasením telefónu (využitie senzoru Gyroskop) ...
                  
