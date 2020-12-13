@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -86,5 +89,39 @@ public class MainActivity_multiplayer_menu extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflanter = getMenuInflater();
+        inflanter.inflate(R.menu.my_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu:
+                Intent myIntent = new Intent(this, MainActivity_menu.class);
+                startActivity(myIntent);
+                return true;
+            case R.id.generator:
+                Intent myIntent2 = new Intent(this, MainActivity_shaked.class);
+                startActivity(myIntent2);
+                return true;
+            case R.id.singleplayer:
+                Intent myIntent3 = new Intent(this, MainActivity_singleplayer.class);
+                startActivity(myIntent3);
+                return true;
+            case R.id.multiplayer:
+                Intent myIntent4 = new Intent(this, MainActivity_multiplayer_menu.class);
+                startActivity(myIntent4);
+                return true;
+            case R.id.rules:
+                Intent myIntent5 = new Intent(this, MainActivity_rules.class);
+                startActivity(myIntent5);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

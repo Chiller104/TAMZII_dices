@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu"
+        android:title="Hlavné menu"
+        android:visible="true" />
+    <item
+        android:id="@+id/generator"
+        android:title="Kocka GENERÁTOR"
+        android:visible="true" />
+    <item
+        android:id="@+id/singleplayer"
+        android:title="Hra jedného hráča (tréning)"
+        android:visible="true" />
+    <item
+        android:id="@+id/multiplayer"
+        android:title="Hra pre dvoch hráčov"
+        android:visible="true" />
+    <item
+        android:id="@+id/rules"
+        android:title="Pravidlá"
+        android:visible="true" />
+</menu>

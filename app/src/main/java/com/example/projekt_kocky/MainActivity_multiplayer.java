@@ -2,9 +2,16 @@ package com.example.projekt_kocky;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -19,7 +26,7 @@ public class MainActivity_multiplayer extends AppCompatActivity {
     public static final Random random = new Random();
 
     TextView player, player1, player2;
-    private TextView score1_counter, total_score1_counter, score2_counter, total_score2_counter, smula;
+    private TextView score1_counter, total_score1_counter, score2_counter, total_score2_counter;
     TextView final_score;
     private Button rollDices, endTurn;
 
@@ -54,6 +61,12 @@ public class MainActivity_multiplayer extends AppCompatActivity {
         player = (TextView) findViewById(R.id.hrac);
         player1 = (TextView) findViewById(R.id.meno1);
         player2 = (TextView) findViewById(R.id.meno2);
+        imageView1 = (ImageView) findViewById(R.id.diceView1);
+        imageView2 = (ImageView) findViewById(R.id.diceView2);
+        imageView3 = (ImageView) findViewById(R.id.diceView3);
+        imageView4 = (ImageView) findViewById(R.id.diceView4);
+        imageView5 = (ImageView) findViewById(R.id.diceView5);
+        imageView6 = (ImageView) findViewById(R.id.diceView6);
 
         final_score = (TextView) findViewById(R.id.ending_score);
 
@@ -62,7 +75,6 @@ public class MainActivity_multiplayer extends AppCompatActivity {
             final Integer ending_score = getIntent().getIntExtra("final_score", 4000);
             //final Integer ending_score = 50;
 
-
             player.setText("Hráč na ťahu:  " + p1);
 
             player1.setText(p1);
@@ -70,20 +82,19 @@ public class MainActivity_multiplayer extends AppCompatActivity {
 
             final_score.setText("Koniec hry: " + ending_score);
 
-        smula = (TextView) findViewById(R.id.bad_luck);
-        smula.setVisibility(View.INVISIBLE);
-
         score1_counter = (TextView) findViewById(R.id.score1);
         total_score1_counter = (TextView) findViewById(R.id.total1);
         score2_counter = (TextView) findViewById(R.id.score2);
         total_score2_counter = (TextView) findViewById(R.id.total2);
 
-        imageView1 = (ImageView) findViewById(R.id.diceView1);
-        imageView2 = (ImageView) findViewById(R.id.diceView2);
-        imageView3 = (ImageView) findViewById(R.id.diceView3);
-        imageView4 = (ImageView) findViewById(R.id.diceView4);
-        imageView5 = (ImageView) findViewById(R.id.diceView5);
-        imageView6 = (ImageView) findViewById(R.id.diceView6);
+        res1 = getResources().getIdentifier("kostka", "drawable", "com.example.projekt_kocky");
+        imageView1.setImageResource(res1);
+        imageView2.setImageResource(res1);
+        imageView3.setImageResource(res1);
+        imageView4.setImageResource(res1);
+        imageView5.setImageResource(res1);
+        imageView6.setImageResource(res1);
+
 
         rollDices.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,16 +102,8 @@ public class MainActivity_multiplayer extends AppCompatActivity {
 
                 roll.start();
                 rolling();
-
             }
         });
-
-        imageView1.setVisibility(View.INVISIBLE);
-        imageView2.setVisibility(View.INVISIBLE);
-        imageView3.setVisibility(View.INVISIBLE);
-        imageView4.setVisibility(View.INVISIBLE);
-        imageView5.setVisibility(View.INVISIBLE);
-        imageView6.setVisibility(View.INVISIBLE);
 
         flag1_visibility = true;
         flag2_visibility = true;
@@ -163,12 +166,19 @@ public class MainActivity_multiplayer extends AppCompatActivity {
                 flag6_visibility = true;
 
                 rollDices.setVisibility(View.VISIBLE);
-                imageView1.setVisibility(View.INVISIBLE);
-                imageView2.setVisibility(View.INVISIBLE);
-                imageView3.setVisibility(View.INVISIBLE);
-                imageView4.setVisibility(View.INVISIBLE);
-                imageView5.setVisibility(View.INVISIBLE);
-                imageView6.setVisibility(View.INVISIBLE);
+                res1 = getResources().getIdentifier("kostka", "drawable", "com.example.projekt_kocky");
+                imageView1.setVisibility(View.VISIBLE);
+                imageView2.setVisibility(View.VISIBLE);
+                imageView3.setVisibility(View.VISIBLE);
+                imageView4.setVisibility(View.VISIBLE);
+                imageView5.setVisibility(View.VISIBLE);
+                imageView6.setVisibility(View.VISIBLE);
+                imageView1.setImageResource(res1);
+                imageView2.setImageResource(res1);
+                imageView3.setImageResource(res1);
+                imageView4.setImageResource(res1);
+                imageView5.setImageResource(res1);
+                imageView6.setImageResource(res1);
             }
         });
 
@@ -350,6 +360,41 @@ public class MainActivity_multiplayer extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflanter = getMenuInflater();
+        inflanter.inflate(R.menu.my_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu:
+                Intent myIntent = new Intent(this, MainActivity_menu.class);
+                startActivity(myIntent);
+                return true;
+            case R.id.generator:
+                Intent myIntent2 = new Intent(this, MainActivity_shaked.class);
+                startActivity(myIntent2);
+                return true;
+            case R.id.singleplayer:
+                Intent myIntent3 = new Intent(this, MainActivity_singleplayer.class);
+                startActivity(myIntent3);
+                return true;
+            case R.id.multiplayer:
+                Intent myIntent4 = new Intent(this, MainActivity_multiplayer_menu.class);
+                startActivity(myIntent4);
+                return true;
+            case R.id.rules:
+                Intent myIntent5 = new Intent(this, MainActivity_rules.class);
+                startActivity(myIntent5);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private int mathematics(int[] pole){
 
         int count_of_0 = 0;
@@ -501,6 +546,13 @@ public class MainActivity_multiplayer extends AppCompatActivity {
     }
 
     public void rolling(){
+
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            v.vibrate(500);
+        }
 
         flag1 = false;
         flag2 = false;

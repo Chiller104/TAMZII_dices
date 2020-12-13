@@ -2,8 +2,16 @@ package com.example.projekt_kocky;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,9 +24,9 @@ import java.util.Random;
 public class MainActivity_singleplayer extends AppCompatActivity {
 
     public static final Random random = new Random();
-    private Button rollDices, endTurn;
+    private Button rollDices, endTurn, back;
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6;
-    private TextView score_counter, total_score_counter, smula;
+    private TextView score_counter, total_score_counter;
     private int value1, value2, value3, value4, value5, value6;
 
     private int res1, res2, res3, res4, res5, res6;
@@ -40,8 +48,10 @@ public class MainActivity_singleplayer extends AppCompatActivity {
 
         final MediaPlayer roll = MediaPlayer.create(this, R.raw.dice_roll);
 
+        back = (Button) findViewById(R.id.back_button);
         endTurn = (Button) findViewById(R.id.end_turn_button);
         rollDices = (Button) findViewById(R.id.button);
+
         imageView1 = (ImageView) findViewById(R.id.diceView1);
         imageView2 = (ImageView) findViewById(R.id.diceView2);
         imageView3 = (ImageView) findViewById(R.id.diceView3);
@@ -49,8 +59,6 @@ public class MainActivity_singleplayer extends AppCompatActivity {
         imageView5 = (ImageView) findViewById(R.id.diceView5);
         imageView6 = (ImageView) findViewById(R.id.diceView6);
 
-        smula = (TextView) findViewById(R.id.bad_luck);
-        smula.setVisibility(View.INVISIBLE);
         score_counter = (TextView) findViewById(R.id.score);
         total_score_counter = (TextView) findViewById(R.id.total_score);
 
@@ -68,6 +76,22 @@ public class MainActivity_singleplayer extends AppCompatActivity {
         flag4_visibility = true;
         flag5_visibility = true;
         flag6_visibility = true;
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(MainActivity_singleplayer.this, MainActivity_menu.class));
+            }
+        });
+
+        rollDices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                roll.start();
+                rolling();
+            }
+        });
 
         endTurn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
@@ -99,14 +123,6 @@ public class MainActivity_singleplayer extends AppCompatActivity {
                 imageView4.setImageResource(res1);
                 imageView5.setImageResource(res1);
                 imageView6.setImageResource(res1);
-            }
-        });
-
-        rollDices.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                roll.start();
-                rolling();
             }
         });
 
@@ -237,6 +253,41 @@ public class MainActivity_singleplayer extends AppCompatActivity {
         });
 
         last_roll_score = mathematics(round_values);;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflanter = getMenuInflater();
+        inflanter.inflate(R.menu.my_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu:
+                Intent myIntent = new Intent(this, MainActivity_menu.class);
+                startActivity(myIntent);
+                return true;
+            case R.id.generator:
+                Intent myIntent2 = new Intent(this, MainActivity_shaked.class);
+                startActivity(myIntent2);
+                return true;
+            case R.id.singleplayer:
+                Intent myIntent3 = new Intent(this, MainActivity_singleplayer.class);
+                startActivity(myIntent3);
+                return true;
+            case R.id.multiplayer:
+                Intent myIntent4 = new Intent(this, MainActivity_multiplayer_menu.class);
+                startActivity(myIntent4);
+                return true;
+            case R.id.rules:
+                Intent myIntent5 = new Intent(this, MainActivity_rules.class);
+                startActivity(myIntent5);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public static int randomDiceValue() {
@@ -371,6 +422,13 @@ public class MainActivity_singleplayer extends AppCompatActivity {
 
 
     public void rolling(){
+
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(400, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            v.vibrate(400);
+        }
 
         flag1 = false;
         flag2 = false;
