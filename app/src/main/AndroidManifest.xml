@@ -5,12 +5,14 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="KOSTKY"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity_rules"></activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity_multiplayer"></activity>
+        <activity android:name=".MainActivity_multiplayer_menu" />
+        <activity android:name=".MainActivity_rules" />
+        <activity android:name=".MainActivity_singleplayer" />
         <activity android:name=".MainActivity_menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

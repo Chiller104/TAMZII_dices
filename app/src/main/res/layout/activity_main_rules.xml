@@ -4,6 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/wooden_table"
     tools:context=".MainActivity_rules">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="285dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="4dp"
+        android:text="PRAVIDLÁ HRY"
+        android:textColor="@android:color/background_light"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rules"
+        android:layout_width="391dp"
+        android:layout_height="621dp"
+        android:layout_marginTop="64dp"
+        android:text="rules"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

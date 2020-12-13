@@ -13,12 +13,12 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-public class MainActivity<flag1> extends AppCompatActivity {
+public class MainActivity_singleplayer extends AppCompatActivity {
 
     public static final Random random = new Random();
     private Button rollDices, endTurn;
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6;
-    private TextView score_counter, total_score_counter;
+    private TextView score_counter, total_score_counter, smula;
     private int value1, value2, value3, value4, value5, value6;
 
     private int res1, res2, res3, res4, res5, res6;
@@ -49,15 +49,18 @@ public class MainActivity<flag1> extends AppCompatActivity {
         imageView5 = (ImageView) findViewById(R.id.diceView5);
         imageView6 = (ImageView) findViewById(R.id.diceView6);
 
+        smula = (TextView) findViewById(R.id.bad_luck);
+        smula.setVisibility(View.INVISIBLE);
         score_counter = (TextView) findViewById(R.id.score);
         total_score_counter = (TextView) findViewById(R.id.total_score);
 
-        imageView1.setVisibility(View.INVISIBLE);
-        imageView2.setVisibility(View.INVISIBLE);
-        imageView3.setVisibility(View.INVISIBLE);
-        imageView4.setVisibility(View.INVISIBLE);
-        imageView5.setVisibility(View.INVISIBLE);
-        imageView6.setVisibility(View.INVISIBLE);
+        res1 = getResources().getIdentifier("kostka", "drawable", "com.example.projekt_kocky");
+        imageView1.setImageResource(res1);
+        imageView2.setImageResource(res1);
+        imageView3.setImageResource(res1);
+        imageView4.setImageResource(res1);
+        imageView5.setImageResource(res1);
+        imageView6.setImageResource(res1);
 
         flag1_visibility = true;
         flag2_visibility = true;
@@ -82,104 +85,28 @@ public class MainActivity<flag1> extends AppCompatActivity {
                 flag5_visibility = true;
                 flag6_visibility = true;
 
-                imageView1.setVisibility(View.INVISIBLE);
-                imageView2.setVisibility(View.INVISIBLE);
-                imageView3.setVisibility(View.INVISIBLE);
-                imageView4.setVisibility(View.INVISIBLE);
-                imageView5.setVisibility(View.INVISIBLE);
-                imageView6.setVisibility(View.INVISIBLE);
+                rollDices.setVisibility(View.VISIBLE);
+                res1 = getResources().getIdentifier("kostka", "drawable", "com.example.projekt_kocky");
+                imageView1.setVisibility(View.VISIBLE);
+                imageView2.setVisibility(View.VISIBLE);
+                imageView3.setVisibility(View.VISIBLE);
+                imageView4.setVisibility(View.VISIBLE);
+                imageView5.setVisibility(View.VISIBLE);
+                imageView6.setVisibility(View.VISIBLE);
+                imageView1.setImageResource(res1);
+                imageView2.setImageResource(res1);
+                imageView3.setImageResource(res1);
+                imageView4.setImageResource(res1);
+                imageView5.setImageResource(res1);
+                imageView6.setImageResource(res1);
             }
         });
 
         rollDices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 roll.start();
-
-                flag1 = false;
-                flag2 = false;
-                flag3 = false;
-                flag4 = false;
-                flag5 = false;
-                flag6 = false;
-
-                if(flag1_visibility==false){
-                    imageView1.setVisibility(View.INVISIBLE);
-                }
-                else imageView1.setVisibility(View.VISIBLE);
-                if(flag2_visibility==false){
-                    imageView2.setVisibility(View.INVISIBLE);
-                }
-                else imageView2.setVisibility(View.VISIBLE);
-                if(flag3_visibility==false){
-                    imageView3.setVisibility(View.INVISIBLE);
-                }
-                else imageView3.setVisibility(View.VISIBLE);
-                if(flag4_visibility==false){
-                    imageView4.setVisibility(View.INVISIBLE);
-                }
-                else imageView4.setVisibility(View.VISIBLE);
-                if(flag5_visibility==false){
-                    imageView5.setVisibility(View.INVISIBLE);
-                }
-                else imageView5.setVisibility(View.VISIBLE);
-                if(flag6_visibility==false){
-                    imageView6.setVisibility(View.INVISIBLE);
-                }
-                else imageView6.setVisibility(View.VISIBLE);
-
-                round_values[0] = 0;
-                round_values[1] = 0;
-                round_values[2] = 0;
-                round_values[3] = 0;
-                round_values[4] = 0;
-                round_values[5] = 0;
-
-                imageView1.setClickable(true);
-                imageView2.setClickable(true);
-                imageView3.setClickable(true);
-                imageView4.setClickable(true);
-                imageView5.setClickable(true);
-                imageView6.setClickable(true);
-
-                value1 = randomDiceValue();
-                value2 = randomDiceValue();
-                value3 = randomDiceValue();
-                value4 = randomDiceValue();
-                value5 = randomDiceValue();
-                value6 = randomDiceValue();
-
-                rotateDice();
-
-                res1 = getResources().getIdentifier("white_" + value1, "drawable", "com.example.projekt_kocky");
-                res1_red = getResources().getIdentifier("red_" + value1, "drawable", "com.example.projekt_kocky");
-                res2 = getResources().getIdentifier("white_" + value2, "drawable", "com.example.projekt_kocky");
-                res2_red = getResources().getIdentifier("red_" + value2, "drawable", "com.example.projekt_kocky");
-                res3 = getResources().getIdentifier("white_" + value3, "drawable", "com.example.projekt_kocky");
-                res3_red = getResources().getIdentifier("red_" + value3, "drawable", "com.example.projekt_kocky");
-                res4 = getResources().getIdentifier("white_" + value4, "drawable", "com.example.projekt_kocky");
-                res4_red = getResources().getIdentifier("red_" + value4, "drawable", "com.example.projekt_kocky");
-                res5 = getResources().getIdentifier("white_" + value5, "drawable", "com.example.projekt_kocky");
-                res5_red = getResources().getIdentifier("red_" + value5, "drawable", "com.example.projekt_kocky");
-                res6 = getResources().getIdentifier("white_" + value6, "drawable", "com.example.projekt_kocky");
-                res6_red = getResources().getIdentifier("red_" + value6, "drawable", "com.example.projekt_kocky");
-
-                imageView1.setImageResource(res1);
-                imageView2.setImageResource(res2);
-                imageView3.setImageResource(res3);
-                imageView4.setImageResource(res4);
-                imageView5.setImageResource(res5);
-                imageView6.setImageResource(res6);
-
-                System.out.println("\nSCORE: " + score);
-                System.out.println("LAST_ROLL_SCORE: " + last_roll_score);
-                System.out.println("TOALA_SCORE: " + total_score);
-
-                last_roll_score = score;
-                score = 0;
-                score_counter.setText("Score: " + last_roll_score);
-                System.out.println("[ " + round_values[0] + " " + round_values[1] + " " + round_values[2] + " " + round_values[3] + " " + round_values[4] + " " + round_values[5] + " ]");
+                rolling();
             }
         });
 
@@ -345,19 +272,11 @@ public class MainActivity<flag1> extends AppCompatActivity {
             imageView6.setVisibility(View.VISIBLE);
             imageView6.startAnimation(anim);
         }
-/*
-        imageView1.startAnimation(anim);
-        imageView2.startAnimation(anim);
-        imageView3.startAnimation(anim);
-        imageView4.startAnimation(anim);
-        imageView5.startAnimation(anim);
-        imageView6.startAnimation(anim);
-
- */
     }
 
     private int mathematics(int[] pole){
 
+        int count_of_0 = 0;
         int count_of_1 = 0;
         int count_of_2 = 0;
         int count_of_3 = 0;
@@ -369,11 +288,12 @@ public class MainActivity<flag1> extends AppCompatActivity {
 
         for(int i = 0; i < pole.length; i++){
 
-            ///System.out.println("kocka " + (i+1) + " = " + pole[i]);
-
             switch (pole[i]){
+                case 0:
+                    count_of_0 = count_of_0 + 1;
+                    break;
                 case 1:
-                count_of_1 = count_of_1 + 1;
+                    count_of_1 = count_of_1 + 1;
                     break;
                 case 2:
                     count_of_2 = count_of_2 + 1;
@@ -393,45 +313,149 @@ public class MainActivity<flag1> extends AppCompatActivity {
             }
         }
 
-        if(count_of_1 == 1){score = score + 100;}
-        else if(count_of_1 == 2){score = score + 200;}
-        else if(count_of_1 == 3){score = score + 1000;}
-        else if(count_of_1 == 4){score = score + 2000;}
-        else if(count_of_1 == 5){score = score + 4000;}
-        else if(count_of_1 == 6){score = score + 8000;}
+        if (count_of_0 == 0){
+            rollDices.setVisibility(View.INVISIBLE);
+        }else{
+            rollDices.setVisibility(View.VISIBLE);
+        }
 
-        if(count_of_2 == 3){score = score + 200;}
-        else if(count_of_2 == 4){score = score + 400;}
-        else if(count_of_2 == 5){score = score + 800;}
-        else if(count_of_2 == 6){score = score + 1600;}
+        /**-----------SMULA-----------**/
+       /* if(count_of_1 == 0 && count_of_5 == 0 && count_of_2 < 3 && count_of_4 < 3 && count_of_3 < 3 && count_of_6 < 3) {
 
-        if(count_of_3 == 3){score = score + 300;}
-        else if(count_of_3 == 4){score = score + 600;}
-        else if(count_of_3 == 5){score = score + 1200;}
-        else if(count_of_3 == 6){score = score + 2400;}
+            smula.setVisibility(View.VISIBLE);
+            rollDices.setVisibility(View.INVISIBLE);
 
-        if(count_of_4 == 3){score = score + 400;}
-        else if(count_of_4 == 4){score = score + 800;}
-        else if(count_of_4 == 5){score = score + 1600;}
-        else if(count_of_4 == 6){score = score + 3200;}
+        }*/
+        /**-----------POSTUPKA-----------**/
+        if (count_of_1 == 1 && count_of_2 == 1 && count_of_3 == 1 && count_of_4 == 1 && count_of_5 == 1 && count_of_6 == 1) {score = score + 1500;}
+        /**-------Ostatne hodnoty-------**/
+        else{
+            if(count_of_1 == 1){score = score + 100;}
+            else if(count_of_1 == 2){score = score + 200;}
+            else if(count_of_1 == 3){score = score + 1000;}
+            else if(count_of_1 == 4){score = score + 2000;}
+            else if(count_of_1 == 5){score = score + 4000;}
+            else if(count_of_1 == 6){score = score + 8000;}
 
-        if(count_of_5 == 1){score = score + 50;}
-        else if(count_of_5 == 2){score = score + 100;}
-        else if(count_of_5 == 3){score = score + 500;}
-        else if(count_of_5 == 4){score = score + 1000;}
-        else if(count_of_5 == 5){score = score + 2000;}
-        else if(count_of_5 == 6){score = score + 4000;}
+            if(count_of_2 == 3){score = score + 200;}
+            else if(count_of_2 == 4){score = score + 400;}
+            else if(count_of_2 == 5){score = score + 800;}
+            else if(count_of_2 == 6){score = score + 1600;}
 
-        if(count_of_6 == 3){score = score + 600;}
-        else if(count_of_6 == 4){score = score + 1200;}
-        else if(count_of_6 == 5){score = score + 2400;}
-        else if(count_of_6 == 6){score = score + 4800;}
+            if(count_of_3 == 3){score = score + 300;}
+            else if(count_of_3 == 4){score = score + 600;}
+            else if(count_of_3 == 5){score = score + 1200;}
+            else if(count_of_3 == 6){score = score + 2400;}
 
-        //last_roll_score = score;
+            if(count_of_4 == 3){score = score + 400;}
+            else if(count_of_4 == 4){score = score + 800;}
+            else if(count_of_4 == 5){score = score + 1600;}
+            else if(count_of_4 == 6){score = score + 3200;}
+
+            if(count_of_5 == 1){score = score + 50;}
+            else if(count_of_5 == 2){score = score + 100;}
+            else if(count_of_5 == 3){score = score + 500;}
+            else if(count_of_5 == 4){score = score + 1000;}
+            else if(count_of_5 == 5){score = score + 2000;}
+            else if(count_of_5 == 6){score = score + 4000;}
+
+            if(count_of_6 == 3){score = score + 600;}
+            else if(count_of_6 == 4){score = score + 1200;}
+            else if(count_of_6 == 5){score = score + 2400;}
+            else if(count_of_6 == 6){score = score + 4800;}
+        }
+
         score_counter.setText("Score: " + score);
         return score;
     }
 
+
+    public void rolling(){
+
+        flag1 = false;
+        flag2 = false;
+        flag3 = false;
+        flag4 = false;
+        flag5 = false;
+        flag6 = false;
+
+        if(flag1_visibility==false){
+            imageView1.setVisibility(View.INVISIBLE);
+        }
+        else imageView1.setVisibility(View.VISIBLE);
+        if(flag2_visibility==false){
+            imageView2.setVisibility(View.INVISIBLE);
+        }
+        else imageView2.setVisibility(View.VISIBLE);
+        if(flag3_visibility==false){
+            imageView3.setVisibility(View.INVISIBLE);
+        }
+        else imageView3.setVisibility(View.VISIBLE);
+        if(flag4_visibility==false){
+            imageView4.setVisibility(View.INVISIBLE);
+        }
+        else imageView4.setVisibility(View.VISIBLE);
+        if(flag5_visibility==false){
+            imageView5.setVisibility(View.INVISIBLE);
+        }
+        else imageView5.setVisibility(View.VISIBLE);
+        if(flag6_visibility==false){
+            imageView6.setVisibility(View.INVISIBLE);
+        }
+        else imageView6.setVisibility(View.VISIBLE);
+
+        round_values[0] = 0;
+        round_values[1] = 0;
+        round_values[2] = 0;
+        round_values[3] = 0;
+        round_values[4] = 0;
+        round_values[5] = 0;
+
+        imageView1.setClickable(true);
+        imageView2.setClickable(true);
+        imageView3.setClickable(true);
+        imageView4.setClickable(true);
+        imageView5.setClickable(true);
+        imageView6.setClickable(true);
+
+        value1 = randomDiceValue();
+        value2 = randomDiceValue();
+        value3 = randomDiceValue();
+        value4 = randomDiceValue();
+        value5 = randomDiceValue();
+        value6 = randomDiceValue();
+
+        rotateDice();
+
+        res1 = getResources().getIdentifier("white_" + value1, "drawable", "com.example.projekt_kocky");
+        res1_red = getResources().getIdentifier("red_" + value1, "drawable", "com.example.projekt_kocky");
+        res2 = getResources().getIdentifier("white_" + value2, "drawable", "com.example.projekt_kocky");
+        res2_red = getResources().getIdentifier("red_" + value2, "drawable", "com.example.projekt_kocky");
+        res3 = getResources().getIdentifier("white_" + value3, "drawable", "com.example.projekt_kocky");
+        res3_red = getResources().getIdentifier("red_" + value3, "drawable", "com.example.projekt_kocky");
+        res4 = getResources().getIdentifier("white_" + value4, "drawable", "com.example.projekt_kocky");
+        res4_red = getResources().getIdentifier("red_" + value4, "drawable", "com.example.projekt_kocky");
+        res5 = getResources().getIdentifier("white_" + value5, "drawable", "com.example.projekt_kocky");
+        res5_red = getResources().getIdentifier("red_" + value5, "drawable", "com.example.projekt_kocky");
+        res6 = getResources().getIdentifier("white_" + value6, "drawable", "com.example.projekt_kocky");
+        res6_red = getResources().getIdentifier("red_" + value6, "drawable", "com.example.projekt_kocky");
+
+        imageView1.setImageResource(res1);
+        imageView2.setImageResource(res2);
+        imageView3.setImageResource(res3);
+        imageView4.setImageResource(res4);
+        imageView5.setImageResource(res5);
+        imageView6.setImageResource(res6);
+
+        System.out.println("\nSCORE: " + score);
+        System.out.println("LAST_ROLL_SCORE: " + last_roll_score);
+        System.out.println("TOALA_SCORE: " + total_score);
+
+        last_roll_score = score;
+        score = 0;
+        score_counter.setText("Score: " + last_roll_score);
+        System.out.println("[ " + round_values[0] + " " + round_values[1] + " " + round_values[2] + " " + round_values[3] + " " + round_values[4] + " " + round_values[5] + " ]");
+    }
 }
 
 

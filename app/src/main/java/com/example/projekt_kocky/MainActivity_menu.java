@@ -29,11 +29,27 @@ public class MainActivity_menu extends AppCompatActivity {
         multiplayer = (Button) findViewById(R.id.multi);
         rules = (Button) findViewById(R.id.rules);
 
-        /**------------TLACIDLO SIBGLEPLAYER-----------**/
+        /**------------TLACIDLO SINGLEPLAYER-----------**/
         singleplayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity_menu.this, MainActivity.class));
+                startActivity(new Intent(MainActivity_menu.this, MainActivity_singleplayer.class));
+            }
+        });
+
+        /**------------TLACIDLO MULTIPLAYER-----------**/
+        multiplayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity_menu.this, MainActivity_multiplayer_menu.class));
+            }
+        });
+
+        /**------------TLACIDLO SIBGLEPLAYER-----------**/
+        rules.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity_menu.this, MainActivity_rules.class));
             }
         });
 
