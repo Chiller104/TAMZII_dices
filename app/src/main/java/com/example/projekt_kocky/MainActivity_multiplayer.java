@@ -55,6 +55,8 @@ public class MainActivity_multiplayer extends AppCompatActivity {
         setContentView(R.layout.activity_main_multiplayer);
 
         final MediaPlayer roll = MediaPlayer.create(this, R.raw.dice_roll);
+        final MediaPlayer song = MediaPlayer.create(this, R.raw.song);
+        song.start();
 
         endTurn = (Button) findViewById(R.id.end_turn_button);
         rollDices = (Button) findViewById(R.id.button);
@@ -73,7 +75,6 @@ public class MainActivity_multiplayer extends AppCompatActivity {
             final String p1 = getIntent().getStringExtra("player_1_name");
             final String p2 = getIntent().getStringExtra("player_2_name");
             final Integer ending_score = getIntent().getIntExtra("final_score", 4000);
-            //final Integer ending_score = 50;
 
             player.setText("Hráč na ťahu:  " + p1);
 
@@ -135,7 +136,7 @@ public class MainActivity_multiplayer extends AppCompatActivity {
                 }
 
                 if(total_score1 > ending_score){
-                    player.setText("Víťazom je  " + p1);
+                    player.setText("Víťazom je  " + p1 + " ! ☺");
                     final_score.setText("Gratulujem, Vyhral si !");
                     endTurn.setVisibility(View.INVISIBLE);
                     rollDices.setVisibility(View.INVISIBLE);
@@ -147,7 +148,7 @@ public class MainActivity_multiplayer extends AppCompatActivity {
                     imageView6.setVisibility(View.INVISIBLE);
                 }
                 else if (total_score2 > ending_score){
-                    player.setText("Víťazom je  " + p2);
+                    player.setText("Víťazom je  " + p2 + " ! ☺");
                     final_score.setText("Gratulujem, Vyhral si !");
                     endTurn.setVisibility(View.INVISIBLE);
                     rollDices.setVisibility(View.INVISIBLE);
@@ -158,27 +159,29 @@ public class MainActivity_multiplayer extends AppCompatActivity {
                     imageView5.setVisibility(View.INVISIBLE);
                     imageView6.setVisibility(View.INVISIBLE);
                 }
-                flag1_visibility = true;
-                flag2_visibility = true;
-                flag3_visibility = true;
-                flag4_visibility = true;
-                flag5_visibility = true;
-                flag6_visibility = true;
+                else {
+                    flag1_visibility = true;
+                    flag2_visibility = true;
+                    flag3_visibility = true;
+                    flag4_visibility = true;
+                    flag5_visibility = true;
+                    flag6_visibility = true;
 
-                rollDices.setVisibility(View.VISIBLE);
-                res1 = getResources().getIdentifier("kostka", "drawable", "com.example.projekt_kocky");
-                imageView1.setVisibility(View.VISIBLE);
-                imageView2.setVisibility(View.VISIBLE);
-                imageView3.setVisibility(View.VISIBLE);
-                imageView4.setVisibility(View.VISIBLE);
-                imageView5.setVisibility(View.VISIBLE);
-                imageView6.setVisibility(View.VISIBLE);
-                imageView1.setImageResource(res1);
-                imageView2.setImageResource(res1);
-                imageView3.setImageResource(res1);
-                imageView4.setImageResource(res1);
-                imageView5.setImageResource(res1);
-                imageView6.setImageResource(res1);
+                    rollDices.setVisibility(View.VISIBLE);
+                    res1 = getResources().getIdentifier("kostka", "drawable", "com.example.projekt_kocky");
+                    imageView1.setVisibility(View.VISIBLE);
+                    imageView2.setVisibility(View.VISIBLE);
+                    imageView3.setVisibility(View.VISIBLE);
+                    imageView4.setVisibility(View.VISIBLE);
+                    imageView5.setVisibility(View.VISIBLE);
+                    imageView6.setVisibility(View.VISIBLE);
+                    imageView1.setImageResource(res1);
+                    imageView2.setImageResource(res1);
+                    imageView3.setImageResource(res1);
+                    imageView4.setImageResource(res1);
+                    imageView5.setImageResource(res1);
+                    imageView6.setImageResource(res1);
+                }
             }
         });
 
@@ -445,13 +448,6 @@ public class MainActivity_multiplayer extends AppCompatActivity {
         }
 
         if(turn == true){
-            /**-----------SMULA-----------**/
-       /* if(count_of_1 == 0 && count_of_5 == 0 && count_of_2 < 3 && count_of_4 < 3 && count_of_3 < 3 && count_of_6 < 3) {
-
-            smula.setVisibility(View.VISIBLE);
-            rollDices.setVisibility(View.INVISIBLE);
-
-        }*/
             /**-----------POSTUPKA-----------**/
             if (count_of_1 == 1 && count_of_2 == 1 && count_of_3 == 1 && count_of_4 == 1 && count_of_5 == 1 && count_of_6 == 1) {score1 = score1 + 1500;}
             /**-------Ostatne hodnoty-------**/
@@ -494,13 +490,7 @@ public class MainActivity_multiplayer extends AppCompatActivity {
             score1_counter.setText(String.valueOf(score1));
             return score1;
         }
-        else { /**-----------SMULA-----------**/
-       /* if(count_of_1 == 0 && count_of_5 == 0 && count_of_2 < 3 && count_of_4 < 3 && count_of_3 < 3 && count_of_6 < 3) {
-
-            smula.setVisibility(View.VISIBLE);
-            rollDices.setVisibility(View.INVISIBLE);
-
-        }*/
+        else{
             /**-----------POSTUPKA-----------**/
             if (count_of_1 == 1 && count_of_2 == 1 && count_of_3 == 1 && count_of_4 == 1 && count_of_5 == 1 && count_of_6 == 1) {score2 = score2 + 1500;}
             /**-------Ostatne hodnoty-------**/

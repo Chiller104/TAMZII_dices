@@ -70,7 +70,7 @@
         android:layout_marginTop="272dp"
         android:background="@android:color/holo_green_light"
         android:fontFamily="casual"
-        android:text="4 000"
+        android:text="1 000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

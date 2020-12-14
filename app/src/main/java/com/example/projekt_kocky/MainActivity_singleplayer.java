@@ -47,7 +47,9 @@ public class MainActivity_singleplayer extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final MediaPlayer roll = MediaPlayer.create(this, R.raw.dice_roll);
+        final MediaPlayer song = MediaPlayer.create(this, R.raw.song);
 
+        song.start();
         back = (Button) findViewById(R.id.back_button);
         endTurn = (Button) findViewById(R.id.end_turn_button);
         rollDices = (Button) findViewById(R.id.button);
@@ -81,6 +83,7 @@ public class MainActivity_singleplayer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                song.stop();
                 startActivity(new Intent(MainActivity_singleplayer.this, MainActivity_menu.class));
             }
         });

@@ -44,7 +44,7 @@ public class MainActivity_multiplayer_menu extends AppCompatActivity {
                     Intent i = new Intent(MainActivity_multiplayer_menu.this, MainActivity_multiplayer.class);
                     i.putExtra("player_1_name", p1);
                     i.putExtra("player_2_name", p2);
-                    i.putExtra("final_score", 4000);
+                    i.putExtra("final_score", 1000);
                     startActivity(i);
                 }
             }

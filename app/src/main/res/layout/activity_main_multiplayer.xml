@@ -119,14 +119,15 @@
 
     <TextView
         android:id="@+id/ending_score"
-        android:layout_width="198dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="528dp"
+        android:layout_width="254dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="536dp"
+        android:gravity="center"
         android:text="Konie hry: "
         android:textColor="@android:color/background_light"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -224,14 +225,15 @@
 
     <TextView
         android:id="@+id/hrac"
-        android:layout_width="334dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="340dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="Hráč na ťahu: ---------------"
         android:textColor="@android:color/background_light"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
