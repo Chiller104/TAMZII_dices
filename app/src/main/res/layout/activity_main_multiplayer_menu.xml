@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity_multiplayer_menu"
-    android:background="@drawable/wooden_table">
+    android:background="@drawable/wooden_table"
+    android:id="@+id/mainView">
 
     <TextView
         android:id="@+id/p1"

@@ -42,29 +42,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    /*
-    public Integer deleteItem(int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("id", id);
-        return db.delete("items", "id=" + id, null);
-    }
-
-    //Cursor representuje vracena data
-    public Cursor getData(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from items where id=" + id + "", null);
-        return res;
-    }
-
-    public boolean updateItem(Integer id, String name, String type, Integer cost) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String strSQL = "UPDATE items SET name = '" + name + "', type = '" + type + "', cost = " + cost + " WHERE id = " + id;
-        db.execSQL(strSQL);
-        return true;
-    }
-*/
-
     public ArrayList<String> getItemList() {
 
         ArrayList<String> arrayList = new ArrayList<String>();

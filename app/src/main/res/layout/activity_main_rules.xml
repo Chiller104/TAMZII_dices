@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/wooden_table"
-    tools:context=".MainActivity_rules">
+    tools:context=".MainActivity_rules"
+    android:id="@+id/mainView">
 
     <TextView
         android:id="@+id/header"

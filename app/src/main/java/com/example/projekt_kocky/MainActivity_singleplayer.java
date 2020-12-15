@@ -1,9 +1,11 @@
 package com.example.projekt_kocky;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,11 +42,19 @@ public class MainActivity_singleplayer extends AppCompatActivity {
     int total_score = 0;
 
     int[] round_values = {0,0,0,0,0,0};
+    View mainView;
+    public final String SHARED_PREFERENCES = "sharePrefs";
+    public final String wallpaper = "wooden_table";
+    public String pozadie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mainView = (View) findViewById(R.id.mainView);
+        loadData();
+        updateViews();
 
         final MediaPlayer roll = MediaPlayer.create(this, R.raw.dice_roll);
         final MediaPlayer song = MediaPlayer.create(this, R.raw.song);
@@ -509,6 +519,34 @@ public class MainActivity_singleplayer extends AppCompatActivity {
         score = 0;
         score_counter.setText("Score: " + last_roll_score);
         System.out.println("[ " + round_values[0] + " " + round_values[1] + " " + round_values[2] + " " + round_values[3] + " " + round_values[4] + " " + round_values[5] + " ]");
+    }
+
+    public void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+        pozadie = sharedPreferences.getString(wallpaper, "");
+    }
+
+    public void updateViews(){
+        if(pozadie == "wooden_table") {
+            System.out.println("Nastavujem pozadie na wooden_table");
+            mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wooden_table));
+        }
+        else if(pozadie == "wallaper_galaxy") {
+            System.out.println("Nastavujem pozadie na wooden_table");
+            mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wallaper_galaxy));
+        }
+        if(pozadie == "wallpaper_grass") {
+            System.out.println("Nastavujem pozadie na wallpaper_grass");
+            mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wallpaper_grass));
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity_menu.class));
+        finish();
+        super.onBackPressed();
     }
 }
 

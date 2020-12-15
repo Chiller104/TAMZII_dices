@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/settings_button"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/wooden_table"
-    tools:context=".MainActivity_menu">
+    tools:context=".MainActivity_menu"
+    android:id="@+id/mainView">
 
     <Button
         android:id="@+id/single"

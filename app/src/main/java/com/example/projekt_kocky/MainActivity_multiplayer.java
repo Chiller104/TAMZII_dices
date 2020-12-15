@@ -1,6 +1,8 @@
 package com.example.projekt_kocky;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +29,11 @@ import java.util.Random;
 public class MainActivity_multiplayer extends AppCompatActivity {
 
     public static final Random random = new Random();
+
+    View mainView;
+    public final String SHARED_PREFERENCES = "sharePrefs";
+    public final String wallpaper = "wooden_table";
+    public String pozadie;
 
     TextView player, player1, player2;
     private TextView score1_counter, total_score1_counter, score2_counter, total_score2_counter;
@@ -57,6 +64,10 @@ public class MainActivity_multiplayer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_multiplayer);
+
+        mainView = (View) findViewById(R.id.mainView);
+        loadData();
+        updateViews();
 
         mydb = new DBHelper(this);
 
@@ -102,7 +113,6 @@ public class MainActivity_multiplayer extends AppCompatActivity {
         imageView5.setImageResource(res1);
         imageView6.setImageResource(res1);
 
-
         rollDices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,7 +150,7 @@ public class MainActivity_multiplayer extends AppCompatActivity {
                     player.setText("Hráč na ťahu:  " + p1);
                 }
 
-                if(total_score1 > ending_score){
+                if(total_score1 >= ending_score){
                     player.setText("Víťazom je  " + p1 + " ! ☺");
                     final_score.setText("Gratulujem, Vyhral si !");
                     endTurn.setVisibility(View.INVISIBLE);
@@ -153,13 +163,13 @@ public class MainActivity_multiplayer extends AppCompatActivity {
                     imageView6.setVisibility(View.INVISIBLE);
 
                     System.out.println(p1 + " --> " + total_score1 + " : " + total_score2 +" <-- " + player2);
-                    if(mydb.insertItem("☺ " + p1, p2, score1, score2)){
+                    if(mydb.insertItem("☺ " + p1, p2, total_score1, total_score2)){
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Uloženie neprebehlo !", Toast.LENGTH_SHORT).show();
                     }
                 }
-                else if (total_score2 > ending_score){
+                else if (total_score2 >= ending_score){
 
                     player.setText("Víťazom je  " + p2 + " ! ☺");
                     final_score.setText("Gratulujem, Vyhral si !");
@@ -346,6 +356,25 @@ public class MainActivity_multiplayer extends AppCompatActivity {
             last_roll_score2 = mathematics(round_values);
         }
 
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mainView = findViewById(R.id.mainView);
+
+        if(requestCode == 123){
+            String result = data.getStringExtra("result");
+
+            if(resultCode == 1) {
+                mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wooden_table));
+            }
+            else if (resultCode == 2){
+                mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.wallaper_galaxy));
+            }
+            else if (resultCode == 3){
+                mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.wallpaper_grass));
+            }
+        }
     }
 
     public static int randomDiceValue() {
@@ -650,5 +679,33 @@ public class MainActivity_multiplayer extends AppCompatActivity {
             score2_counter.setText(String.valueOf(last_roll_score2));
         }
         System.out.println("[ " + round_values[0] + " " + round_values[1] + " " + round_values[2] + " " + round_values[3] + " " + round_values[4] + " " + round_values[5] + " ]");
+    }
+
+    public void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+        pozadie = sharedPreferences.getString(wallpaper, "");
+    }
+
+    public void updateViews(){
+        if(pozadie == "wooden_table") {
+            System.out.println("Nastavujem pozadie na wooden_table");
+            mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wooden_table));
+        }
+        else if(pozadie == "wallaper_galaxy") {
+            System.out.println("Nastavujem pozadie na wooden_table");
+            mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wallaper_galaxy));
+        }
+        if(pozadie == "wallpaper_grass") {
+            System.out.println("Nastavujem pozadie na wallpaper_grass");
+            mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wallpaper_grass));
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity_multiplayer_menu.class));
+        finish();
+        super.onBackPressed();
     }
 }

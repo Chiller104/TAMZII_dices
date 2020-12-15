@@ -1,9 +1,11 @@
 package com.example.projekt_kocky;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -36,10 +38,19 @@ public class MainActivity_shaked extends AppCompatActivity {
     private  float scelLast;
     private float shake;
 
+    View mainView;
+    public final String SHARED_PREFERENCES = "sharePrefs";
+    public final String wallpaper = "wooden_table";
+    public String pozadie;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_shaked);
+
+        mainView = (View) findViewById(R.id.mainView);
+        loadData();
+        updateViews();
 
         sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
@@ -140,5 +151,35 @@ public class MainActivity_shaked extends AppCompatActivity {
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
         }
     };
+
+
+    public void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+        pozadie = sharedPreferences.getString(wallpaper, "");
+    }
+
+    public void updateViews(){
+        if(pozadie == "wooden_table") {
+            System.out.println("Nastavujem pozadie na wooden_table");
+            mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wooden_table));
+        }
+        else if(pozadie == "wallaper_galaxy") {
+            System.out.println("Nastavujem pozadie na wooden_table");
+            mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wallaper_galaxy));
+        }
+        if(pozadie == "wallpaper_grass") {
+            System.out.println("Nastavujem pozadie na wallpaper_grass");
+            mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wallpaper_grass));
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity_menu.class));
+        finish();
+        super.onBackPressed();
+    }
+
 }
 

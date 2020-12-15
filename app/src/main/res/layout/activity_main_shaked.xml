@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity_shaked"
-    android:background="@drawable/wooden_table">
+    android:background="@drawable/wooden_table"
+    android:id="@+id/mainView">
 
     <ImageView
         android:id="@+id/menu_dice"
