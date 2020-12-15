@@ -64,39 +64,26 @@
         app:layout_constraintTop_toBottomOf="@+id/p1" />
 
     <Button
-        android:id="@+id/button_4000"
-        android:layout_width="241dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="272dp"
-        android:background="@android:color/holo_green_light"
-        android:fontFamily="casual"
-        android:text="1 000"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/button_8000"
         android:layout_width="241dp"
         android:layout_height="60dp"
-        android:layout_marginTop="364dp"
+        android:layout_marginTop="320dp"
         android:background="@android:color/holo_orange_light"
         android:fontFamily="casual"
-        android:text="8 000"
+        android:text="4 000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_12000"
+        android:id="@+id/button_4000"
         android:layout_width="241dp"
         android:layout_height="60dp"
-        android:layout_marginTop="464dp"
-        android:background="@android:color/holo_red_light"
+        android:layout_marginTop="248dp"
+        android:background="@android:color/holo_green_light"
         android:fontFamily="casual"
-        android:text="12 000"
+        android:text="1 000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,12 +93,38 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="12dp"
         android:text="HRAŤ DO:"
         android:textColor="@android:color/background_light"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/button_4000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_12000"
+        android:layout_width="241dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="392dp"
+        android:background="@android:color/holo_red_light"
+        android:fontFamily="casual"
+        android:text="8 000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/history"
+        android:layout_width="202dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="472dp"
+        android:background="@android:color/background_dark"
+        android:text="História hier"
+        android:textColor="@android:color/background_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

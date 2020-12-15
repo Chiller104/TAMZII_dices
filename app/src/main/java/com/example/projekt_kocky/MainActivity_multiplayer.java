@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,7 +19,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.EOFException;
 import java.util.Random;
 
 public class MainActivity_multiplayer extends AppCompatActivity {
@@ -48,11 +51,14 @@ public class MainActivity_multiplayer extends AppCompatActivity {
     int total_score2 = 0;
 
     int[] round_values = {0,0,0,0,0,0};
+    private DBHelper mydb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_multiplayer);
+
+        mydb = new DBHelper(this);
 
         final MediaPlayer roll = MediaPlayer.create(this, R.raw.dice_roll);
         final MediaPlayer song = MediaPlayer.create(this, R.raw.song);
@@ -100,7 +106,6 @@ public class MainActivity_multiplayer extends AppCompatActivity {
         rollDices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 roll.start();
                 rolling();
             }
@@ -146,8 +151,16 @@ public class MainActivity_multiplayer extends AppCompatActivity {
                     imageView4.setVisibility(View.INVISIBLE);
                     imageView5.setVisibility(View.INVISIBLE);
                     imageView6.setVisibility(View.INVISIBLE);
+
+                    System.out.println(p1 + " --> " + total_score1 + " : " + total_score2 +" <-- " + player2);
+                    if(mydb.insertItem("☺ " + p1, p2, score1, score2)){
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Uloženie neprebehlo !", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else if (total_score2 > ending_score){
+
                     player.setText("Víťazom je  " + p2 + " ! ☺");
                     final_score.setText("Gratulujem, Vyhral si !");
                     endTurn.setVisibility(View.INVISIBLE);
@@ -158,6 +171,13 @@ public class MainActivity_multiplayer extends AppCompatActivity {
                     imageView4.setVisibility(View.INVISIBLE);
                     imageView5.setVisibility(View.INVISIBLE);
                     imageView6.setVisibility(View.INVISIBLE);
+
+                    System.out.println(p1 + " --> " + total_score1 + " : " + total_score2 +" <-- " + player2);
+                    if(mydb.insertItem(p1, p2 + " ☺", total_score1, total_score2)){
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Uloženie neprebehlo !", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
                     flag1_visibility = true;

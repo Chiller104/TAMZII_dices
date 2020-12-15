@@ -19,13 +19,14 @@ import java.util.Random;
 public class MainActivity_menu extends AppCompatActivity {
 
     public static final Random random = new Random();
-    private Button singleplayer, multiplayer, rules, random_generator;
+    private Button singleplayer, multiplayer, rules, random_generator, settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        settings = (Button) findViewById(R.id.settings_button);
         singleplayer = (Button) findViewById(R.id.single);
         multiplayer = (Button) findViewById(R.id.multi);
         rules = (Button) findViewById(R.id.rules);
@@ -61,6 +62,12 @@ public class MainActivity_menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity_menu.this, MainActivity_rules.class));
+            }
+        });
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity_menu.this, MainActivity_settings.class));
             }
         });
     }

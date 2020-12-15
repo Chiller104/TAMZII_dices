@@ -373,13 +373,6 @@ public class MainActivity_singleplayer extends AppCompatActivity {
             rollDices.setVisibility(View.VISIBLE);
         }
 
-        /**-----------SMULA-----------**/
-       /* if(count_of_1 == 0 && count_of_5 == 0 && count_of_2 < 3 && count_of_4 < 3 && count_of_3 < 3 && count_of_6 < 3) {
-
-            smula.setVisibility(View.VISIBLE);
-            rollDices.setVisibility(View.INVISIBLE);
-
-        }*/
         /**-----------POSTUPKA-----------**/
         if (count_of_1 == 1 && count_of_2 == 1 && count_of_3 == 1 && count_of_4 == 1 && count_of_5 == 1 && count_of_6 == 1) {score = score + 1500;}
         /**-------Ostatne hodnoty-------**/

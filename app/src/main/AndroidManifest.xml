@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.projekt_kocky">
-    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_dice"
@@ -9,7 +11,9 @@
         android:roundIcon="@mipmap/ic_dice"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity_shaked"></activity>
+        <activity android:name=".MainActivity_settings"></activity>
+        <activity android:name=".MainActivity_history" />
+        <activity android:name=".MainActivity_shaked" />
         <activity android:name=".MainActivity_multiplayer" />
         <activity android:name=".MainActivity_multiplayer_menu" />
         <activity android:name=".MainActivity_rules" />

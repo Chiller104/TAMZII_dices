@@ -16,7 +16,7 @@ import android.widget.EditText;
 public class MainActivity_multiplayer_menu extends AppCompatActivity {
 
     EditText player1, player2;
-    Button b4, b8, b12;
+    Button b4, b8, b12, history;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class MainActivity_multiplayer_menu extends AppCompatActivity {
         player1 = findViewById(R.id.name_1);
         player2 = findViewById(R.id.name_2);
 
+        history = (Button) findViewById(R.id.history);
         b4 = (Button) findViewById(R.id.button_4000);
         b8 = (Button) findViewById(R.id.button_8000);
         b12 = (Button) findViewById(R.id.button_12000);
@@ -44,7 +45,7 @@ public class MainActivity_multiplayer_menu extends AppCompatActivity {
                     Intent i = new Intent(MainActivity_multiplayer_menu.this, MainActivity_multiplayer.class);
                     i.putExtra("player_1_name", p1);
                     i.putExtra("player_2_name", p2);
-                    i.putExtra("final_score", 1000);
+                    i.putExtra("final_score", 100);
                     startActivity(i);
                 }
             }
@@ -64,7 +65,7 @@ public class MainActivity_multiplayer_menu extends AppCompatActivity {
                     Intent i = new Intent(MainActivity_multiplayer_menu.this, MainActivity_multiplayer.class);
                     i.putExtra("player_1_name", p1);
                     i.putExtra("player_2_name", p2);
-                    i.putExtra("final_score", 8000);
+                    i.putExtra("final_score", 4000);
                     startActivity(i);
                 }
             }
@@ -84,9 +85,16 @@ public class MainActivity_multiplayer_menu extends AppCompatActivity {
                     Intent i = new Intent(MainActivity_multiplayer_menu.this, MainActivity_multiplayer.class);
                     i.putExtra("player_1_name", p1);
                     i.putExtra("player_2_name", p2);
-                    i.putExtra("final_score", 12000);
+                    i.putExtra("final_score", 8000);
                     startActivity(i);
                 }
+            }
+        });
+
+        history.setOnClickListener( new View.OnClickListener() {
+            public void onClick(View v) {
+                    Intent i = new Intent(MainActivity_multiplayer_menu.this, MainActivity_history.class);
+                    startActivity(i);
             }
         });
     }

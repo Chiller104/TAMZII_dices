@@ -10,7 +10,7 @@
         android:id="@+id/back_button"
         android:layout_width="132dp"
         android:layout_height="55dp"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="508dp"
         android:background="@android:color/holo_orange_dark"
         android:text="BACK"
         android:textColor="@android:color/background_light"
