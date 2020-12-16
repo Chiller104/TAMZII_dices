@@ -25,11 +25,11 @@ public class MainActivity_multiplayer_menu extends AppCompatActivity {
     public final String WALLPAPER = "wooden_table";
     public final String HRAC1 = "hrac1";
     public final String HRAC2 = "hrac2";
-    public final String SCORE1 = "0";
-    public final String SCORE2 = "0";
-    public final String TSCORE1 = "0";
-    public final String TSCORE2 = "0";
-    public final String ENDING = "0";
+    public final String SCORE1 = "score1";
+    public final String SCORE2 = "score2";
+    public final String TSCORE1 = "tscore1";
+    public final String TSCORE2 = "tscore2";
+    public final String ENDING = "ending";
 
     int score1 = 0;
     int score2 = 0;
@@ -81,20 +81,29 @@ public class MainActivity_multiplayer_menu extends AppCompatActivity {
 
                     editor.putString(HRAC1, p1);
                     editor.putString(HRAC2, p2);
-                    editor.putInt(SCORE1, score1);
-                    editor.putInt(SCORE2, score2);
-                    editor.putInt(TSCORE1, total1);
-                    editor.putInt(TSCORE2, total1);
+                    editor.putInt(SCORE1, 0);
+                    editor.putInt(SCORE2, 0);
+                    editor.putInt(TSCORE1, 0);
+                    editor.putInt(TSCORE2, 0);
                     editor.putInt(ENDING, 1000);
                     editor.commit();
 
-                    System.out.println("vytvorenie novej hry v menu");
+                    pozadie = sharedPreferences.getString(WALLPAPER, "");
+                    p1 = sharedPreferences.getString(HRAC1, "");
+                    p2 = sharedPreferences.getString(HRAC2, "");
+                    score1 = sharedPreferences.getInt(SCORE1, 0);
+                    score2 = sharedPreferences.getInt(SCORE2, 0);
+                    total1 = sharedPreferences.getInt(TSCORE1, 0);
+                    total2 = sharedPreferences.getInt(TSCORE1, 0);
+                    ending_score = sharedPreferences.getInt(ENDING, 1000);
+
+                    System.out.println(" \n\npred vytvorenim hry: ");
                     System.out.println("Hrac 1 =  " + p1);
                     System.out.println("Hrac 2 =  " + p2);
                     System.out.println("Score 1 = " + score1);
                     System.out.println("Score 2 = " + score2);
-                    System.out.println("Total 1 = " + total1);
-                    System.out.println("Total 2 = " + total2);
+                    System.out.println("Total Score 1 = " + score1);
+                    System.out.println("Total Score 2 = " + score2);
                     System.out.println("Ending score = " + ending_score);
 
                     Intent i = new Intent(MainActivity_multiplayer_menu.this, MainActivity_multiplayer.class);

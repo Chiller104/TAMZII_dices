@@ -22,11 +22,11 @@ public class MainActivity_rules extends AppCompatActivity {
 
     public final String HRAC1 = "hrac1";
     public final String HRAC2 = "hrac2";
-    public final String SCORE1 = "0";
-    public final String SCORE2 = "0";
-    public final String TSCORE1 = "0";
-    public final String TSCORE2 = "0";
-    public final String ENDING = "0";
+    public final String SCORE1 = "score1";
+    public final String SCORE2 = "score2";
+    public final String TSCORE1 = "tscore1";
+    public final String TSCORE2 = "tscore2";
+    public final String ENDING = "ending";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

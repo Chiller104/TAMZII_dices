@@ -43,12 +43,17 @@ public class MainActivity_shaked extends AppCompatActivity {
     public final String wallpaper = "wooden_table";
     public String pozadie;
 
+    MediaPlayer roll;
+    MediaPlayer song;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_shaked);
 
+        song = MediaPlayer.create(this, R.raw.song);
         mainView = (View) findViewById(R.id.mainView);
+
         loadData();
         updateViews();
 
@@ -120,8 +125,7 @@ public class MainActivity_shaked extends AppCompatActivity {
 
     private void rotateDice(){
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        final MediaPlayer roll = MediaPlayer.create(this, R.raw.dice_roll);
-
+        roll = MediaPlayer.create(this, R.raw.dice_roll);
         kostka.startAnimation(anim);
         roll.start();
     }
@@ -173,10 +177,10 @@ public class MainActivity_shaked extends AppCompatActivity {
         }
     }
 
-
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, MainActivity_menu.class));
+        song.stop();
         finish();
         super.onBackPressed();
     }

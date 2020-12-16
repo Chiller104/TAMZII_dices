@@ -47,6 +47,8 @@ public class MainActivity_singleplayer extends AppCompatActivity {
     public final String wallpaper = "wooden_table";
     public String pozadie;
 
+    MediaPlayer song;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +59,7 @@ public class MainActivity_singleplayer extends AppCompatActivity {
         updateViews();
 
         final MediaPlayer roll = MediaPlayer.create(this, R.raw.dice_roll);
-        final MediaPlayer song = MediaPlayer.create(this, R.raw.song);
+        song = MediaPlayer.create(this, R.raw.song);
 
         song.start();
         back = (Button) findViewById(R.id.back_button);
@@ -544,6 +546,7 @@ public class MainActivity_singleplayer extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, MainActivity_menu.class));
+        song.stop();
         finish();
         super.onBackPressed();
     }

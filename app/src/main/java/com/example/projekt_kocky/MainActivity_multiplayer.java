@@ -36,11 +36,11 @@ public class MainActivity_multiplayer extends AppCompatActivity {
     public final String WALLPAPER = "wooden_table";
     public final String HRAC1 = "hrac1";
     public final String HRAC2 = "hrac2";
-    public final String SCORE1 = "0";
-    public final String SCORE2 = "0";
-    public final String TSCORE1 = "0";
-    public final String TSCORE2 = "0";
-    public final String ENDING = "0";
+    public final String SCORE1 = "score1";
+    public final String SCORE2 = "score2";
+    public final String TSCORE1 = "tscore1";
+    public final String TSCORE2 = "tscore2";
+    public final String ENDING = "ending";
 
     public String pozadie;
 
@@ -65,6 +65,8 @@ public class MainActivity_multiplayer extends AppCompatActivity {
 
     int[] round_values = {0,0,0,0,0,0};
     private DBHelper mydb;
+    MediaPlayer roll;
+    MediaPlayer song;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +75,8 @@ public class MainActivity_multiplayer extends AppCompatActivity {
 
         mydb = new DBHelper(this);
 
-        final MediaPlayer roll = MediaPlayer.create(this, R.raw.dice_roll);
-        final MediaPlayer song = MediaPlayer.create(this, R.raw.song);
+        roll = MediaPlayer.create(this, R.raw.dice_roll);
+        song = MediaPlayer.create(this, R.raw.song);
         song.start();
 
         mainView = (View) findViewById(R.id.mainView);
@@ -686,6 +688,16 @@ public class MainActivity_multiplayer extends AppCompatActivity {
     }
 
     public void loadData(){
+
+        System.out.println(" \n\nPRED LOADOM");
+        System.out.println("Hrac 1 =  " + p1);
+        System.out.println("Hrac 2 =  " + p2);
+        System.out.println("Score 1 = " + score1);
+        System.out.println("Score 2 = " + score2);
+        System.out.println("Total 1 = " + total_score1);
+        System.out.println("Total 2 = " + total_score2);
+        System.out.println("Ending score = " + ending_score);
+
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
         pozadie = sharedPreferences.getString(WALLPAPER, "");
         p1 = sharedPreferences.getString(HRAC1, "");
@@ -695,6 +707,15 @@ public class MainActivity_multiplayer extends AppCompatActivity {
         total_score1 = sharedPreferences.getInt(TSCORE1, 0);
         total_score2 = sharedPreferences.getInt(TSCORE2, 0);
         ending_score = sharedPreferences.getInt(ENDING, 1000);
+
+        System.out.println(" \n\nPO LOADE");
+        System.out.println("Hrac 1 =  " + p1);
+        System.out.println("Hrac 2 =  " + p2);
+        System.out.println("Score 1 = " + score1);
+        System.out.println("Score 2 = " + score2);
+        System.out.println("Total 1 = " + total_score1);
+        System.out.println("Total 2 = " + total_score2);
+        System.out.println("Ending score = " + ending_score);
     }
 
     public void updateViews(){
@@ -719,7 +740,6 @@ public class MainActivity_multiplayer extends AppCompatActivity {
         System.out.println("Total 1 = " + total_score1);
         System.out.println("Total 2 = " + total_score2);
         System.out.println("Ending score = " + ending_score);
-
     }
 
     @Override
@@ -727,6 +747,7 @@ public class MainActivity_multiplayer extends AppCompatActivity {
 
         saveData(p1, p2, score1, score2, total_score1, total_score2, ending_score);
         startActivity(new Intent(this, MainActivity_multiplayer_menu.class));
+        song.stop();
         finish();
         super.onBackPressed();
     }
@@ -734,6 +755,7 @@ public class MainActivity_multiplayer extends AppCompatActivity {
     @Override
     protected void onPause() {
         saveData(p1, p2, score1, score2, total_score1, total_score2, ending_score);
+        song.stop();
         super.onPause();
     }
 
@@ -742,8 +764,8 @@ public class MainActivity_multiplayer extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString(HRAC1, p1);
-        editor.putString(HRAC2, p2);
+        editor.putString(HRAC1, player1);
+        editor.putString(HRAC2, player2);
         editor.putInt(SCORE1, sc1);
         editor.putInt(SCORE2, sc2);
         editor.putInt(TSCORE1, tscore1);

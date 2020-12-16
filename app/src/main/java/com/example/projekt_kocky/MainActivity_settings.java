@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,10 +18,13 @@ public class MainActivity_settings extends AppCompatActivity {
 
     View mainView;
     ImageButton wall1, wall2, wall3;
+    Switch sw1;
     public final String SHARED_PREFERENCES = "sharePrefs";
     public final String WALLPAPER = "wooden_table";
     public String pozadie;
-    public final String Switch = "Switch";
+    public final String SWITCH = "Switch";
+    public Boolean music = false;
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -59,6 +64,11 @@ public class MainActivity_settings extends AppCompatActivity {
                 recreate();
             }
         });
+        sw1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+               saveData("");
+            }
+        });
     }
 
     public void saveData(String wall){
@@ -75,6 +85,8 @@ public class MainActivity_settings extends AppCompatActivity {
         else if (wall == "wallpaper_grass"){
             editor.putString(WALLPAPER,"wallpaper_grass");
         }
+        editor.putBoolean(SWITCH, sw1.isChecked());
+
         editor.commit();
     }
 
@@ -96,6 +108,8 @@ public class MainActivity_settings extends AppCompatActivity {
             System.out.println("Nastavujem pozadie na wallpaper_grass");
             mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wallpaper_grass));
         }
+        System.out.println("SWitch je: " + music);
+        sw1.setChecked(music);
     }
 
     @Override
