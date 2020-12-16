@@ -6,7 +6,8 @@ Pravidlá su napísané v sekcií pravidlá, každý hráč by si ich mal pred h
 Cieľom hry pre dvoch hráčov je aby jeden z hráčov prekročil hranicu bodov ktorá bola na začiatku hry zvolená,
 týmto sa hráč stane víťazom.
 
-Projekt obsahuje: pestré uživatelské rozhranie s jednoduchým ovládaním hry /
+Projekt obsahuje: SqlLite DB -> ukladá historiu odohranych hier /
+                  shared Preferences -> uloženie nastaveneho pozadia + dáta hry pri pozastavení /
                   menu, ktoré dostane hráča do každej aktivity /
                   zvuky (hodenie kockami) /
                   vibrácia pri hodení kockami /
