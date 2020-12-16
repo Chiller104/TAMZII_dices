@@ -426,7 +426,6 @@ public class MainActivity_singleplayer extends AppCompatActivity {
         return score;
     }
 
-
     public void rolling(){
 
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);

@@ -20,6 +20,14 @@ public class MainActivity_rules extends AppCompatActivity {
     public final String wallpaper = "wooden_table";
     public String pozadie;
 
+    public final String HRAC1 = "hrac1";
+    public final String HRAC2 = "hrac2";
+    public final String SCORE1 = "0";
+    public final String SCORE2 = "0";
+    public final String TSCORE1 = "0";
+    public final String TSCORE2 = "0";
+    public final String ENDING = "0";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +48,22 @@ public class MainActivity_rules extends AppCompatActivity {
                 "6x číslo (2,3,4,5,6) = 1600,2400,3200,4000,4800\n" +
                 "U jedničky je výjimka: \n111=1000,\n1111=2000,\n11111=4000,\n111111=8000\n" +
                 "Postupka (123456) = 1500");
+
+        loadData();
+        updateViews();
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(HRAC1, "");
+        editor.putString(HRAC2, "");
+        editor.putInt(SCORE1, 0);
+        editor.putInt(SCORE2, 0);
+        editor.putInt(TSCORE1, 0);
+        editor.putInt(TSCORE2, 0);
+        editor.putInt(ENDING, 0);
+
+        editor.commit();
     }
 
     @Override

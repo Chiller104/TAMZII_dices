@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Console;
 import java.io.EOFException;
 import java.util.Random;
 
@@ -32,12 +33,21 @@ public class MainActivity_multiplayer extends AppCompatActivity {
 
     View mainView;
     public final String SHARED_PREFERENCES = "sharePrefs";
-    public final String wallpaper = "wooden_table";
+    public final String WALLPAPER = "wooden_table";
+    public final String HRAC1 = "hrac1";
+    public final String HRAC2 = "hrac2";
+    public final String SCORE1 = "0";
+    public final String SCORE2 = "0";
+    public final String TSCORE1 = "0";
+    public final String TSCORE2 = "0";
+    public final String ENDING = "0";
+
     public String pozadie;
 
     TextView player, player1, player2;
     private TextView score1_counter, total_score1_counter, score2_counter, total_score2_counter;
     TextView final_score;
+
     private Button rollDices, endTurn;
 
     private ImageView imageView1, imageView2, imageView3, imageView4, imageView5, imageView6;
@@ -50,12 +60,8 @@ public class MainActivity_multiplayer extends AppCompatActivity {
     boolean flag1_visibility, flag2_visibility, flag3_visibility, flag4_visibility, flag5_visibility, flag6_visibility;
     boolean turn = true;
 
-    int score1 = 0;
-    int score2 = 0;
-    int last_roll_score1 = 0;
-    int last_roll_score2 = 0;
-    int total_score1 = 0;
-    int total_score2 = 0;
+    int score1, score2, last_roll_score1, last_roll_score2, total_score1, total_score2, ending_score;
+    String p1, p2;
 
     int[] round_values = {0,0,0,0,0,0};
     private DBHelper mydb;
@@ -65,45 +71,51 @@ public class MainActivity_multiplayer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_multiplayer);
 
-        mainView = (View) findViewById(R.id.mainView);
-        loadData();
-        updateViews();
-
         mydb = new DBHelper(this);
 
         final MediaPlayer roll = MediaPlayer.create(this, R.raw.dice_roll);
         final MediaPlayer song = MediaPlayer.create(this, R.raw.song);
         song.start();
 
+        mainView = (View) findViewById(R.id.mainView);
         endTurn = (Button) findViewById(R.id.end_turn_button);
         rollDices = (Button) findViewById(R.id.button);
         player = (TextView) findViewById(R.id.hrac);
         player1 = (TextView) findViewById(R.id.meno1);
         player2 = (TextView) findViewById(R.id.meno2);
+        score1_counter = (TextView) findViewById(R.id.score1);
+        total_score1_counter = (TextView) findViewById(R.id.total1);
+        score2_counter = (TextView) findViewById(R.id.score2);
+        total_score2_counter = (TextView) findViewById(R.id.total2);
         imageView1 = (ImageView) findViewById(R.id.diceView1);
         imageView2 = (ImageView) findViewById(R.id.diceView2);
         imageView3 = (ImageView) findViewById(R.id.diceView3);
         imageView4 = (ImageView) findViewById(R.id.diceView4);
         imageView5 = (ImageView) findViewById(R.id.diceView5);
         imageView6 = (ImageView) findViewById(R.id.diceView6);
-
         final_score = (TextView) findViewById(R.id.ending_score);
 
-            final String p1 = getIntent().getStringExtra("player_1_name");
-            final String p2 = getIntent().getStringExtra("player_2_name");
-            final Integer ending_score = getIntent().getIntExtra("final_score", 4000);
+
+        System.out.println("PRED loadom =  " + p1);
+        System.out.println("Hrac 1 =  " + p1);
+        System.out.println("Hrac 2 =  " + p2);
+        System.out.println("Score 1 = " + score1);
+        System.out.println("Score 2 = " + score2);
+        System.out.println("Total 1 = " + total_score1);
+        System.out.println("Total 2 = " + total_score2);
+        System.out.println("Ending score = " + ending_score);
+
+        loadData();
+        updateViews();
 
             player.setText("Hráč na ťahu:  " + p1);
-
             player1.setText(p1);
             player2.setText(p2);
-
             final_score.setText("Koniec hry: " + ending_score);
-
-        score1_counter = (TextView) findViewById(R.id.score1);
-        total_score1_counter = (TextView) findViewById(R.id.total1);
-        score2_counter = (TextView) findViewById(R.id.score2);
-        total_score2_counter = (TextView) findViewById(R.id.total2);
+            score1_counter.setText(String.valueOf(score1));
+            score2_counter.setText(String.valueOf(score2));
+            total_score1_counter.setText(String.valueOf(total_score1));
+            total_score2_counter.setText(String.valueOf(total_score2));
 
         res1 = getResources().getIdentifier("kostka", "drawable", "com.example.projekt_kocky");
         imageView1.setImageResource(res1);
@@ -150,9 +162,10 @@ public class MainActivity_multiplayer extends AppCompatActivity {
                     player.setText("Hráč na ťahu:  " + p1);
                 }
 
-                if(total_score1 >= ending_score){
+                if(total_score1 > ending_score){
                     player.setText("Víťazom je  " + p1 + " ! ☺");
                     final_score.setText("Gratulujem, Vyhral si !");
+
                     endTurn.setVisibility(View.INVISIBLE);
                     rollDices.setVisibility(View.INVISIBLE);
                     imageView1.setVisibility(View.INVISIBLE);
@@ -162,17 +175,23 @@ public class MainActivity_multiplayer extends AppCompatActivity {
                     imageView5.setVisibility(View.INVISIBLE);
                     imageView6.setVisibility(View.INVISIBLE);
 
-                    System.out.println(p1 + " --> " + total_score1 + " : " + total_score2 +" <-- " + player2);
                     if(mydb.insertItem("☺ " + p1, p2, total_score1, total_score2)){
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Uloženie neprebehlo !", Toast.LENGTH_SHORT).show();
                     }
+                    score1 = 0;
+                    score2 = 0;
+                    total_score1 = 0;
+                    total_score2 = 0;
+                    ending_score = 0;
+                    saveData("","",score1, score2, total_score1, total_score2, ending_score);
                 }
-                else if (total_score2 >= ending_score){
+                else if (total_score2 > ending_score){
 
                     player.setText("Víťazom je  " + p2 + " ! ☺");
                     final_score.setText("Gratulujem, Vyhral si !");
+
                     endTurn.setVisibility(View.INVISIBLE);
                     rollDices.setVisibility(View.INVISIBLE);
                     imageView1.setVisibility(View.INVISIBLE);
@@ -182,12 +201,17 @@ public class MainActivity_multiplayer extends AppCompatActivity {
                     imageView5.setVisibility(View.INVISIBLE);
                     imageView6.setVisibility(View.INVISIBLE);
 
-                    System.out.println(p1 + " --> " + total_score1 + " : " + total_score2 +" <-- " + player2);
                     if(mydb.insertItem(p1, p2 + " ☺", total_score1, total_score2)){
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Uloženie neprebehlo !", Toast.LENGTH_SHORT).show();
                     }
+                    score1 = 0;
+                    score2 = 0;
+                    total_score1 = 0;
+                    total_score2 = 0;
+                    ending_score = 0;
+                    saveData("","",score1,score2, total_score1,total_score2,ending_score);
                 }
                 else {
                     flag1_visibility = true;
@@ -354,26 +378,6 @@ public class MainActivity_multiplayer extends AppCompatActivity {
         }
         else {
             last_roll_score2 = mathematics(round_values);
-        }
-
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        mainView = findViewById(R.id.mainView);
-
-        if(requestCode == 123){
-            String result = data.getStringExtra("result");
-
-            if(resultCode == 1) {
-                mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wooden_table));
-            }
-            else if (resultCode == 2){
-                mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.wallaper_galaxy));
-            }
-            else if (resultCode == 3){
-                mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.wallpaper_grass));
-            }
         }
     }
 
@@ -683,7 +687,14 @@ public class MainActivity_multiplayer extends AppCompatActivity {
 
     public void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
-        pozadie = sharedPreferences.getString(wallpaper, "");
+        pozadie = sharedPreferences.getString(WALLPAPER, "");
+        p1 = sharedPreferences.getString(HRAC1, "");
+        p2 = sharedPreferences.getString(HRAC2, "");
+        score1 = sharedPreferences.getInt(SCORE1, 0);
+        score2 = sharedPreferences.getInt(SCORE2, 0);
+        total_score1 = sharedPreferences.getInt(TSCORE1, 0);
+        total_score2 = sharedPreferences.getInt(TSCORE2, 0);
+        ending_score = sharedPreferences.getInt(ENDING, 1000);
     }
 
     public void updateViews(){
@@ -699,13 +710,54 @@ public class MainActivity_multiplayer extends AppCompatActivity {
             System.out.println("Nastavujem pozadie na wallpaper_grass");
             mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wallpaper_grass));
         }
-    }
 
+        System.out.println("Vytvorená hra:");
+        System.out.println("Hrac 1 =  " + p1);
+        System.out.println("Hrac 2 =  " + p2);
+        System.out.println("Score 1 = " + score1);
+        System.out.println("Score 2 = " + score2);
+        System.out.println("Total 1 = " + total_score1);
+        System.out.println("Total 2 = " + total_score2);
+        System.out.println("Ending score = " + ending_score);
+
+    }
 
     @Override
     public void onBackPressed() {
+
+        saveData(p1, p2, score1, score2, total_score1, total_score2, ending_score);
         startActivity(new Intent(this, MainActivity_multiplayer_menu.class));
         finish();
         super.onBackPressed();
     }
+
+    @Override
+    protected void onPause() {
+        saveData(p1, p2, score1, score2, total_score1, total_score2, ending_score);
+        super.onPause();
+    }
+
+    public void saveData(String player1, String player2, Integer sc1, Integer sc2, Integer tscore1, Integer tscore2, Integer ended){
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(HRAC1, p1);
+        editor.putString(HRAC2, p2);
+        editor.putInt(SCORE1, sc1);
+        editor.putInt(SCORE2, sc2);
+        editor.putInt(TSCORE1, tscore1);
+        editor.putInt(TSCORE2, tscore2);
+        editor.putInt(ENDING, ended);
+        editor.commit();
+
+        System.out.println("Hrac 1 =  " + p1);
+        System.out.println("Hrac 2 =  " + p2);
+        System.out.println("Score 1 = " + score1);
+        System.out.println("Score 2 = " + score2);
+        System.out.println("Total 1 = " + total_score1);
+        System.out.println("Total 2 = " + total_score2);
+        System.out.println("Ending score = " + ending_score);
+    }
+
 }

@@ -18,28 +18,52 @@ import android.widget.EditText;
 public class MainActivity_multiplayer_menu extends AppCompatActivity {
 
     EditText player1, player2;
-    Button b4, b8, b12, history;
+    Button b4, b8, b12, history, pokracovat;
     View mainView;
+
     public final String SHARED_PREFERENCES = "sharePrefs";
-    public final String wallpaper = "wooden_table";
+    public final String WALLPAPER = "wooden_table";
+    public final String HRAC1 = "hrac1";
+    public final String HRAC2 = "hrac2";
+    public final String SCORE1 = "0";
+    public final String SCORE2 = "0";
+    public final String TSCORE1 = "0";
+    public final String TSCORE2 = "0";
+    public final String ENDING = "0";
+
+    int score1 = 0;
+    int score2 = 0;
+    int total1 = 0;
+    int total2 = 0;
     public String pozadie;
+    public Integer ending_score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_multiplayer_menu);
 
+        player1 = findViewById(R.id.name_1);
+        player2 = findViewById(R.id.name_2);
+
+        pokracovat = (Button) findViewById(R.id.pokracovat);
+        b4 = (Button) findViewById(R.id.button_4000);
+        b8 = (Button) findViewById(R.id.button_8000);
+        b12 = (Button) findViewById(R.id.button_12000);
+        history = (Button) findViewById(R.id.history);
+
+        pokracovat.setVisibility(View.VISIBLE);
         mainView = (View) findViewById(R.id.mainView);
         loadData();
         updateViews();
 
-        player1 = findViewById(R.id.name_1);
-        player2 = findViewById(R.id.name_2);
-
-        history = (Button) findViewById(R.id.history);
-        b4 = (Button) findViewById(R.id.button_4000);
-        b8 = (Button) findViewById(R.id.button_8000);
-        b12 = (Button) findViewById(R.id.button_12000);
+        pokracovat.setOnClickListener( new View.OnClickListener() {
+            public void onClick(View v) {
+                    Intent i = new Intent(MainActivity_multiplayer_menu.this, MainActivity_multiplayer.class);
+                    startActivity(i);
+                    finish();
+                }
+        });
 
         b4.setOnClickListener( new View.OnClickListener() {
             public void onClick(View v) {
@@ -52,11 +76,30 @@ public class MainActivity_multiplayer_menu extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(player2.getText())) {
                     player2.setError("Vyplnte meno hráča 2!");
                 } else {
+                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.putString(HRAC1, p1);
+                    editor.putString(HRAC2, p2);
+                    editor.putInt(SCORE1, score1);
+                    editor.putInt(SCORE2, score2);
+                    editor.putInt(TSCORE1, total1);
+                    editor.putInt(TSCORE2, total1);
+                    editor.putInt(ENDING, 1000);
+                    editor.commit();
+
+                    System.out.println("vytvorenie novej hry v menu");
+                    System.out.println("Hrac 1 =  " + p1);
+                    System.out.println("Hrac 2 =  " + p2);
+                    System.out.println("Score 1 = " + score1);
+                    System.out.println("Score 2 = " + score2);
+                    System.out.println("Total 1 = " + total1);
+                    System.out.println("Total 2 = " + total2);
+                    System.out.println("Ending score = " + ending_score);
+
                     Intent i = new Intent(MainActivity_multiplayer_menu.this, MainActivity_multiplayer.class);
-                    i.putExtra("player_1_name", p1);
-                    i.putExtra("player_2_name", p2);
-                    i.putExtra("final_score", 100);
                     startActivity(i);
+                    finish();
                 }
             }
         });
@@ -72,11 +115,22 @@ public class MainActivity_multiplayer_menu extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(player2.getText())) {
                     player2.setError("Vyplnte meno hráča 2!");
                 } else {
+
+                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.putString(HRAC1, p1);
+                    editor.putString(HRAC2, p2);
+                    editor.putInt(SCORE1, 0);
+                    editor.putInt(SCORE2, 0);
+                    editor.putInt(TSCORE1, 0);
+                    editor.putInt(TSCORE2, 0);
+                    editor.putInt(ENDING, 4000);
+                    editor.commit();
+                    finish();
                     Intent i = new Intent(MainActivity_multiplayer_menu.this, MainActivity_multiplayer.class);
-                    i.putExtra("player_1_name", p1);
-                    i.putExtra("player_2_name", p2);
-                    i.putExtra("final_score", 4000);
                     startActivity(i);
+
                 }
             }
         });
@@ -92,11 +146,21 @@ public class MainActivity_multiplayer_menu extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(player2.getText())) {
                     player2.setError("Vyplnte meno hráča 2!");
                 } else {
+                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    editor.putString(HRAC1, p1);
+                    editor.putString(HRAC2, p2);
+                    editor.putInt(SCORE1, 0);
+                    editor.putInt(SCORE2, 0);
+                    editor.putInt(TSCORE1, 0);
+                    editor.putInt(TSCORE2, 0);
+                    editor.putInt(ENDING, 8000);
+                    editor.commit();
+
                     Intent i = new Intent(MainActivity_multiplayer_menu.this, MainActivity_multiplayer.class);
-                    i.putExtra("player_1_name", p1);
-                    i.putExtra("player_2_name", p2);
-                    i.putExtra("final_score", 8000);
                     startActivity(i);
+                    finish();
                 }
             }
         });
@@ -104,9 +168,11 @@ public class MainActivity_multiplayer_menu extends AppCompatActivity {
         history.setOnClickListener( new View.OnClickListener() {
             public void onClick(View v) {
                     Intent i = new Intent(MainActivity_multiplayer_menu.this, MainActivity_history.class);
+                    finish();
                     startActivity(i);
             }
         });
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,8 +210,10 @@ public class MainActivity_multiplayer_menu extends AppCompatActivity {
     }
 
     public void loadData(){
+
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
-        pozadie = sharedPreferences.getString(wallpaper, "");
+        pozadie = sharedPreferences.getString(WALLPAPER, "");
+        ending_score = sharedPreferences.getInt(ENDING, 0);
     }
 
     public void updateViews(){
@@ -157,12 +225,20 @@ public class MainActivity_multiplayer_menu extends AppCompatActivity {
             System.out.println("Nastavujem pozadie na wooden_table");
             mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wallaper_galaxy));
         }
-        if(pozadie == "wallpaper_grass") {
+        else if(pozadie == "wallpaper_grass") {
             System.out.println("Nastavujem pozadie na wallpaper_grass");
             mainView.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.wallpaper_grass));
         }
-    }
 
+            System.out.println("toto je ending score = " + ending_score);
+
+        if (ending_score == 0) {
+            pokracovat.setVisibility(View.INVISIBLE);
+        }
+        else{
+            pokracovat.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     public void onBackPressed() {

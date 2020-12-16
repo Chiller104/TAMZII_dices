@@ -15,10 +15,9 @@ import android.widget.Toast;
 public class MainActivity_settings extends AppCompatActivity {
 
     View mainView;
-
     ImageButton wall1, wall2, wall3;
     public final String SHARED_PREFERENCES = "sharePrefs";
-    public final String wallpaper = "wooden_table";
+    public final String WALLPAPER = "wooden_table";
     public String pozadie;
     public final String Switch = "Switch";
 
@@ -68,20 +67,20 @@ public class MainActivity_settings extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         if (wall == "wooden_table"){
-            editor.putString(wallpaper,"wooden_table");
+            editor.putString(WALLPAPER,"wooden_table");
         }
         else if (wall == "wallaper_galaxy"){
-            editor.putString(wallpaper,"wallaper_galaxy");
+            editor.putString(WALLPAPER,"wallaper_galaxy");
         }
         else if (wall == "wallpaper_grass"){
-            editor.putString(wallpaper,"wallpaper_grass");
+            editor.putString(WALLPAPER,"wallpaper_grass");
         }
         editor.commit();
     }
 
     public void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
-        pozadie = sharedPreferences.getString(wallpaper, "");
+        pozadie = sharedPreferences.getString(WALLPAPER, "");
     }
 
     public void updateViews(){

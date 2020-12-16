@@ -84,7 +84,7 @@ public class MainActivity_history extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, MainActivity_menu.class));
+        startActivity(new Intent(this, MainActivity_multiplayer_menu.class));
         finish();
         super.onBackPressed();
     }

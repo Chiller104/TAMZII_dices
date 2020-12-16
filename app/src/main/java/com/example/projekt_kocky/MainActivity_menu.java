@@ -29,6 +29,18 @@ public class MainActivity_menu extends AppCompatActivity {
     public final String SHARED_PREFERENCES = "sharePrefs";
     public final String wallpaper = "wooden_table";
     public String pozadie;
+    public Integer ending_score = 0;
+    public Integer score1 = 0;
+    public Integer score2 = 0;
+    public String meno1;
+    public String meno2;
+
+    public String hrac1 = "hrac1";
+    public String hrac2 = "hrac2";
+    public String s1 = "0";
+    public String s2 = "0";
+    public String ending = "ending";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,8 +141,15 @@ public class MainActivity_menu extends AppCompatActivity {
     }
 
     public void loadData(){
+
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
         pozadie = sharedPreferences.getString(wallpaper, "");
+        ending_score = sharedPreferences.getInt(ending, 0);
+        score1 = sharedPreferences.getInt(s1, 0);
+        score2 = sharedPreferences.getInt(s2, 0);
+        meno1 = sharedPreferences.getString(hrac1, "");
+        meno2 = sharedPreferences.getString(hrac2, "");
+        System.out.println(ending_score + " " + score1  + " " +  score2  + " " +  meno1 + " " +  meno2);
     }
 
     public void updateViews(){
